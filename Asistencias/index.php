@@ -11,7 +11,7 @@
     <br>
     <a href="agregar_alumnos.php"><button>Administrar alumnos</button></a>
     <br>
-    <a href="cuentas.php"><button>Cambiar cuentas</button></a>
+    <a href="cuentas.php"><button>Administrar cuentas</button></a>
     <br>
 </body>
 </html>
