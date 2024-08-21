@@ -4,51 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Alumnos</title>
-    <style>
-        /* Añade estilos CSS aquí si es necesario */
-        .formularios {
-            display: flex;
-        }
-        form table {
-            border: 1px solid #000;
-            margin: 20px;
-            border-width: 2px;
-            height: 250px;
-        }
-        select {
-            width: 100%;
-        }
-        #quitar-fila {
-            vertical-align: top;
-        }
-        .boton {
-            margin-left: 40%;
-            margin-right: 40%;
-        }
-        .mensaje {
-            text-align: center;
-        }
-        .tabla-alumnos {
-            width: 100%;
-        }
-        .tabla-alumnos th, .tabla-alumnos td {
-            padding: 10px;
-            text-align: center;
-        }
-        .filtros {
-            margin-bottom: 20px;
-        }
-        .filtros input, .filtros select {
-            margin-right: 10px;
-        }
-        .resultados_alumno{
-            height: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="css/agregar_alumnos.css">
+
 </head>
 <body>
 
 <?php
+
 // Conexión a la base de datos
 $conn = new mysqli("localhost", "root", "", "registro");
 if ($conn->connect_error) {
@@ -215,8 +177,7 @@ $result = $conn->query($query);
 
 // Generar tabla de alumnos
 $tabla = '<table border="1" cellspacing="2" cellpadding="2">
-          <tr>
-            <td>ID</td>
+          <tr class="header">
             <td>Curso</td>
             <td>Nombre</td>
             <td>Apellido</td>
@@ -228,7 +189,6 @@ $tabla = '<table border="1" cellspacing="2" cellpadding="2">
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $tabla .= '<tr>
-                    <td>' . escapar($row["id"]) . '</td>
                     <td>' . escapar($row["curso"]) . '</td>
                     <td>' . escapar($row["nombre"]) . '</td>
                     <td>' . escapar($row["apellido"]) . '</td>
@@ -237,15 +197,15 @@ if ($result->num_rows > 0) {
                     <td>
                         <form action="" method="post" style="display:inline;">
                             <input type="hidden" name="id_ver" value="' . escapar($row["id"]) . '">
-                            <a href="#tabla_ver"><input type="submit" name="ver" value="Ver"></a>
+                            <a href="#tabla_ver"><input type="submit" name="ver" class="ver" value=""></a>
                         </form>
                         <form action="" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="' . escapar($row["id"]) . '">
-                            <input type="submit" name="editar-btn" value="Editar">
+                            <input type="submit" name="editar-btn" class="editar" value="">
                         </form>
                         <form action="" method="post" style="display:inline;">
                             <input type="hidden" name="id-del" value="' . escapar($row["id"]) . '">
-                            <input type="submit" name="quitar" value="Eliminar">
+                            <input type="submit" name="quitar" class="eliminar" value="">
                         </form>
 
                     </td>
@@ -319,10 +279,12 @@ $tabla .= '</table>';
     </form>
 </div>
 
+
+<div class="acciones">
 <?php echo $tabla; ?>
+</div>
 <br>
 <div class="formularios">
-
     <form action="" method="post">
         <table class="formulario">
             <h2>Editar Alumno</h2>
@@ -400,8 +362,6 @@ $tabla .= '</table>';
                     <select name="sexo" required>
                         <option value="Masculino" <?php if(isset($sexo) && $sexo == "Masculino") echo 'selected'; ?>>Masculino</option>
                         <option value="Femenino" <?php if(isset($sexo) && $sexo == "Femenino") echo 'selected'; ?>>Femenino</option>
-                        <option value="Otro" <?php if(isset($sexo) && $sexo == "Otro") echo 'selected'; ?>>Otro</option>
-                    </select>
                 </td>
             </tr>
         </table>
@@ -411,8 +371,8 @@ $tabla .= '</table>';
         <div class="mensaje">
         <?php echo escapar($msj_editar); ?>
         </div>
-        <input class="boton" type="submit" name="registrar" value="Registrar">
-        <input class="boton" type="submit" name="editar" value="Editar">
+        <input class="btn registrar" type="submit" name="registrar" value="Registrar">
+        <input class="btn editar2" type="submit" name="editar" value="Editar">
     </form>
 </div>
 
@@ -433,7 +393,7 @@ $tabla .= '</table>';
                     $tardanzas = 0;
                     $faltas = 0;
                     foreach ($asistencias as $asistencia): 
-                        if ($asistencia['estado'] == 'faltó') {
+                        if ($asistencia['estado'] == 'inasistencia') {
                             $faltastotales++;
                             $faltas++;
                         } elseif ($asistencia['estado'] == 'tardanza') {
@@ -445,7 +405,7 @@ $tabla .= '</table>';
                             <td><?php echo htmlspecialchars($asistencia['fecha']); ?></td>
                             <td><?php echo htmlspecialchars($asistencia['estado']); ?></td>
                             <td>
-                                <?php if ($asistencia['estado'] == 'faltó'): ?>
+                                <?php if ($asistencia['estado'] == 'inasistencia'): ?>
                                     <input type="checkbox" name="justificada[<?php echo $asistencia['id']; ?>]" <?php echo $asistencia['justificada'] ? 'checked' : ''; ?>>
                                 <?php endif; ?>
                             </td>
@@ -466,11 +426,12 @@ $tabla .= '</table>';
         <input type="hidden" name="asistencias" value='<?php echo json_encode($asistencias); ?>'>
     <input type="submit" name="descargar" value="Descargar en PDF">
 </form>
+</div>
 <?php endif; ?>
 <?php
 $conn->close();
 ?>
 
-<a href="index.php"> <button>Volver</button> </a>
+<a href="index.php"> <button class="btn btn-logout">Volver</button> </a>
 </body>
 </html>
