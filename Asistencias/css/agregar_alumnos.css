@@ -161,7 +161,7 @@ table tr:hover {
 }
 
 .ver{
-    background: url("/img/ver.png") no-repeat center center;
+    background: url("../img/ver.png") no-repeat center center;
     background-size: cover;
     border-radius: 100%;
     height: 40px;
@@ -175,7 +175,7 @@ table tr:hover {
 }
 
 .editar{
-    background: url("/img/editar.png") no-repeat center center;
+    background: url("../img/editar.png") no-repeat center center;
     background-size: cover;
     border-radius: 100%;
     height: 40px;
@@ -189,7 +189,7 @@ table tr:hover {
 }
 
 .eliminar{
-    background: url("/img/basurero.png") no-repeat center center;
+    background: url("../img/basurero.png") no-repeat center center;
     background-size: cover;
     border-radius: 100%;
     height: 40px;
