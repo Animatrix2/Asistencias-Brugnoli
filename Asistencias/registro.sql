@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 10-08-2024 a las 22:32:15
+-- Tiempo de generación: 28-08-2024 a las 14:28:01
 -- Versión del servidor: 8.2.0
 -- Versión de PHP: 8.2.13
 
@@ -66,56 +66,33 @@ CREATE TABLE IF NOT EXISTS `asistencias` (
   `id` int NOT NULL AUTO_INCREMENT,
   `alumno_id` int DEFAULT NULL,
   `fecha` date NOT NULL,
-  `estado` enum('asistió','faltó','tardanza') NOT NULL,
+  `estado` enum('asistencia','inasistencia','tardanza') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `justificada` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `alumno_id` (`alumno_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=309 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=413 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `asistencias`
 --
 
 INSERT INTO `asistencias` (`id`, `alumno_id`, `fecha`, `estado`, `justificada`) VALUES
-(180, 2, '2024-05-29', 'faltó', 0),
-(179, 5, '2024-05-29', 'asistió', 0),
-(178, 4, '2024-05-29', 'faltó', 0),
-(177, 3, '2024-05-29', 'tardanza', 0),
-(176, 1, '2024-05-29', 'asistió', 0),
-(110, 7, '2024-05-24', 'faltó', 0),
-(109, 6, '2024-05-24', 'tardanza', 0),
-(99, 6, '2024-05-22', 'asistió', 0),
-(100, 7, '2024-05-22', 'asistió', 0),
-(181, 1, '2024-06-09', 'tardanza', 0),
-(182, 4, '2024-06-09', 'faltó', 0),
-(183, 5, '2024-06-09', 'faltó', 1),
-(184, 10, '2024-06-14', 'asistió', 0),
-(185, 9, '2024-06-14', 'asistió', 0),
-(186, 10, '2024-06-15', 'faltó', 1),
-(187, 9, '2024-06-15', 'faltó', 1),
-(188, 15, '2024-06-15', 'faltó', 0),
-(195, 10, '2024-06-23', 'asistió', 0),
-(196, 9, '2024-06-23', 'faltó', 0),
-(197, 15, '2024-06-23', 'faltó', 0),
-(210, 10, '2024-06-27', 'asistió', 0),
-(211, 9, '2024-06-27', 'tardanza', 0),
-(212, 15, '2024-06-27', 'asistió', 0),
-(261, 16, '2024-07-27', 'asistió', 0),
-(262, 10, '2024-07-27', 'tardanza', 0),
-(263, 9, '2024-07-27', 'tardanza', 0),
-(264, 15, '2024-07-27', 'tardanza', 0),
-(265, 17, '2024-07-27', 'faltó', 0),
-(266, 18, '2024-07-27', 'faltó', 0),
-(267, 19, '2024-07-27', 'faltó', 0),
-(268, 20, '2024-07-27', 'asistió', 0),
-(301, 16, '2024-07-30', 'asistió', 0),
-(302, 10, '2024-07-30', 'asistió', 0),
-(303, 9, '2024-07-30', 'asistió', 0),
-(304, 15, '2024-07-30', 'asistió', 0),
-(305, 17, '2024-07-30', 'asistió', 0),
-(306, 18, '2024-07-30', 'asistió', 0),
-(307, 19, '2024-07-30', 'asistió', 0),
-(308, 20, '2024-07-30', 'asistió', 0);
+(412, 20, '2024-08-21', 'inasistencia', 0),
+(411, 19, '2024-08-21', 'inasistencia', 0),
+(410, 18, '2024-08-21', 'asistencia', 0),
+(409, 17, '2024-08-21', 'asistencia', 0),
+(408, 15, '2024-08-21', 'inasistencia', 0),
+(407, 9, '2024-08-21', 'tardanza', 0),
+(406, 10, '2024-08-21', 'tardanza', 0),
+(405, 16, '2024-08-21', 'tardanza', 0),
+(372, 20, '2024-08-19', 'inasistencia', 0),
+(371, 19, '2024-08-19', 'inasistencia', 0),
+(370, 18, '2024-08-19', 'inasistencia', 0),
+(369, 17, '2024-08-19', 'inasistencia', 0),
+(368, 15, '2024-08-19', 'inasistencia', 0),
+(367, 9, '2024-08-19', 'inasistencia', 0),
+(366, 10, '2024-08-19', 'inasistencia', 0),
+(365, 16, '2024-08-19', 'inasistencia', 0);
 
 -- --------------------------------------------------------
 
@@ -128,16 +105,18 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `contraseña` varchar(255) NOT NULL,
-  `permisos` set('1ro 1ra CB','1ro 2da CB','1ro 3ra CB','1ro 4ta CB','1ro 5ta CB','1ro 6ta CB','1ro 7ma CB','2do 1ra CB','2do 2da CB','2do 3ra CB','2do 4ta CB','2do 5ta CB','1ro 1ra IPP','1ro 2da IPP','2do 1ra IPP','2do 2da IPP','3ro 1ra IPP','3ro 2da IPP','4to 1ra IPP','4to 2da IPP','1ro 1ra GAO','1ro 2da GAO','1ro 3ra GAO','1ro 4ta GAO','2do 1ra GAO','2do 2da GAO','2do 3ra GAO','2do 4ta GAO','3ro 1ra GAO','3ro 2da GAO','3ro 3ra GAO','3ro 4ta GAO','4to 1ra GAO','4to 2da GAO','4to 3ra GAO','4to 4ta GAO','1ro 1ra TEP','2do 1ra TEP','3ro 1ra TEP','4to 1ra TEP') DEFAULT NULL,
+  `permisos` set('1ro 1ra CB','1ro 2da CB','1ro 3ra CB','1ro 4ta CB','1ro 5ta CB','1ro 6ta CB','1ro 7ma CB','2do 1ra CB','2do 2da CB','2do 3ra CB','2do 4ta CB','2do 5ta CB','1ro 1ra IPP','1ro 2da IPP','2do 1ra IPP','2do 2da IPP','3ro 1ra IPP','3ro 2da IPP','4to 1ra IPP','4to 2da IPP','1ro 1ra GAO','1ro 2da GAO','1ro 3ra GAO','1ro 4ta GAO','2do 1ra GAO','2do 2da GAO','2do 3ra GAO','2do 4ta GAO','3ro 1ra GAO','3ro 2da GAO','3ro 3ra GAO','3ro 4ta GAO','4to 1ra GAO','4to 2da GAO','4to 3ra GAO','4to 4ta GAO','1ro 1ra TEP','2do 1ra TEP','3ro 1ra TEP','4to 1ra TEP','Administrador') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `contraseña`, `permisos`) VALUES
-(5, 'gonzalo', '$2y$10$pU2.Bs6MDZta7PyCLZDdjOQq9g.ccLsb4U0SUnj1HeEwGZaKN/Dly', '1ro 1ra GAO');
+(1, 'admin', '$2y$10$olWiN01dNLm6Y3bvACEuAuYlE5x7QQgKqFisxhPHI0mu7JR5ZzLha', 'Administrador'),
+(11, 'sosa', '$2y$10$IT7JZzUll94g2triJ54klutAeT8kYnxiw3nVxxZkr5I74MxULp2lW', '3ro 1ra IPP,3ro 2da IPP,4to 1ra IPP,4to 2da IPP,1ro 1ra TEP,2do 1ra TEP,3ro 1ra TEP,4to 1ra TEP'),
+(15, 'carla', '$2y$10$dTF6KKoPjJfeQf2HJgObhOPPezwTyAdkpjPtx51Ql6dG65J0IC0vi', '1ro 1ra CB,1ro 2da CB,1ro 3ra CB,1ro 4ta CB,1ro 5ta CB,1ro 6ta CB,1ro 7ma CB,2do 1ra CB,2do 2da CB,2do 3ra CB,2do 4ta CB,2do 5ta CB');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
