@@ -1,0 +1,254 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+}
+
+h1 {
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.filtros {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filtros label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.filtros select, .filtros input[type="text"] {
+    width: 200px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.filtros input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filtros input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.formularios {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.formulario {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formulario select, .formulario input[type="text"], .formulario input[type="number"] {
+    width: 500px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.formulario h2 {
+    margin-top: 0;
+    color: #007BFF;
+}
+
+.formulario input[type="submit"] {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.formulario input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.mensaje {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.acciones form {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.acciones input[type="submit"] {
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .filtros form {
+        flex-direction: column;
+    }
+
+    .filtros label, .filtros select, .filtros input {
+        flex: 1 1 100%;
+    }
+
+    .acciones table, .formularios table {
+        font-size: 12px;
+    }
+    .formulario select, .formulario input[type="text"], .formulario input[type="number"] {
+        width: 300px;
+    }
+}
+
+.ver{
+    background: url("../img/ver.png") no-repeat center center;
+    background-size: cover;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    background-color: #007BFF;
+    border: 0;
+}
+
+.ver:hover{
+    background-color: #0056b3;
+}
+
+.editar{
+    background: url("../img/editar.png") no-repeat center center;
+    background-size: cover;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    background-color: #1bb355; ;
+    border: 0;
+}
+
+.editar:hover{
+    background-color: #11853e;
+}
+
+.eliminar{
+    background: url("../img/basurero.png") no-repeat center center;
+    background-size: cover;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    background-color: #c82333 ;
+    border: 0;
+}
+
+.eliminar:hover{
+    background-color: #9b1a27;
+}
+
+.btn-logout {
+    background-color: #dc3545;
+    width:auto;
+    display:block;
+    margin: auto;
+}
+
+.btn {
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    width: 150px;
+}
+
+.editar2{
+    background-color: #1bb355; ;
+}
+
+.editar2:hover {
+    background-color: #11853e;
+}
+
+.registrar{
+    background-color: #007BFF;
+}
+
+.registrar:hover {
+    background-color: #0056b3;
+}
+
+.btn-logout {
+    background-color: #dc3545;
+
+    display:block;
+    margin: auto;
+}
+
+.btn-logout:hover {
+    background-color: #c82333;
+}
+
+.header td{
+    text-align: center;
+    font-weight: bold;
+}
