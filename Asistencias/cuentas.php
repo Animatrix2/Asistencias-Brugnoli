@@ -102,7 +102,6 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Gestión de Cuentas</title>
 
 </head>
-<>
     <div class="container">
         <h2>Lista de Usuarios</h2>
         <div class="table-container">
@@ -141,8 +140,13 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="cursos">
         <label>Cursos habilitados:</label><br>
 
+<div class="opciones">
 
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("Administrador", explode(',', $permiso))) echo 'checked'; ?> value="Administrador"> Administrador<br>
+
+<table>
+<tr>
+<td>
+<div class="CB">
 <strong>Ciclo Básico</strong><br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra CB"> 1ro 1ra CB<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 2da CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 2da CB"> 1ro 2da CB<br>
@@ -156,7 +160,11 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 3ra CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 3ra CB"> 2do 3ra CB<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 4ta CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 4ta CB"> 2do 4ta CB<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 5ta CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 5ta CB"> 2do 5ta CB<br>
+</div>
+</td>
 
+<td>
+<div class="IPP">
 <br><strong>IPP</strong><br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra IPP"> 1ro 1ra IPP<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="1ro 2da IPP"> 1ro 2da IPP<br>
@@ -166,7 +174,11 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="3ro 2da IPP"> 3ro 2da IPP<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="4to 1ra IPP"> 4to 1ra IPP<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="4to 2da IPP"> 4to 2da IPP<br>
+</div>
+</td>
 
+<td>
+<div class="GAO">
 <br><strong>GAO</strong><br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra GAO"> 1ro 1ra GAO<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="1ro 2da GAO"> 1ro 2da GAO<br>
@@ -184,12 +196,22 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 2da GAO"> 4to 2da GAO<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 3ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 3ra GAO"> 4to 3ra GAO<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 4ta GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 4ta GAO"> 4to 4ta GAO<br>
+</div>
+</td>
 
+<td>
+<div class="TEP"></div>
 <br><strong>TEP</strong><br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra TEP"> 1ro 1ra TEP<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="2do 1ra TEP"> 2do 1ra TEP<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="3ro 1ra TEP"> 3ro 1ra TEP<br>
 <input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="4to 1ra TEP"> 4to 1ra TEP<br>
+</div>
+</td>
+</table>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("Administrador", explode(',', $permiso))) echo 'checked'; ?> value="Administrador"> Administrador<br>
+
+</div>
 </div>
 
             <button class="btn registrar" type="submit" name="crear">Crear Cuenta</button>
@@ -197,13 +219,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 
-        <h2>Eliminar una cuenta</h2>
-        <form method="POST" action="">
-                <label for="id">ID de la cuenta a eliminar:</label>
-                <input type="number" name="id" required>
-            <br>
-            <button class="btn eliminar2" type="submit" name="eliminar">Eliminar Cuenta</button>
-        </form>
+        
         
         <a href="menu.php"><button class="btn btn-logout" >Volver</button></a>
 

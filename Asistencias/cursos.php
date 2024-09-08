@@ -60,7 +60,7 @@ if (isset($_POST["registrar"])) {
                 require 'opciones.php';
 
                 // Verificar si el usuario tiene acceso al curso
-                if (in_array($curso, $permisos_usuario)) {
+                if (in_array($curso, $permisos_usuario) OR (in_array("Administrador", $permisos_usuario))) {
                     // Obtener los alumnos del curso permitido
                     $stmt = $pdo->prepare("SELECT id, nombre, apellido FROM alumnos WHERE curso = :curso");
                     $stmt->execute(['curso' => $curso]);

@@ -215,7 +215,7 @@ if ($result->num_rows > 0) {
 }
 $tabla .= '</table>';
 ?>
-
+        <a href="menu.php"> <button class="btn btn-logout">Volver</button> </a>
 <h1>Agregar Alumnos</h1>
 <br>
 
@@ -371,67 +371,85 @@ $tabla .= '</table>';
         <div class="mensaje">
         <?php echo escapar($msj_editar); ?>
         </div>
-        <input class="btn registrar" type="submit" name="registrar" value="Registrar">
+        <div class="botones">
+        <input class="btn registrar"  type="submit" name="registrar" value="Registrar">
         <input class="btn editar2" type="submit" name="editar" value="Editar">
+        
+        </div>
+
+        
     </form>
 </div>
 
 <?php if ($alumno_ver): ?>
+<div class="container">
     <h2>Faltas y Tardanzas de <?php echo htmlspecialchars($alumno_ver['nombre'] . ' ' . $alumno_ver['apellido']); ?></h2>
-        <form method="post" action="">
-            <table id="tabla_ver" border="1" class="resultados_alumno">
-                <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Estado</th>
-                        <th>Justificada</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $faltastotales = 0;
-                    $tardanzas = 0;
-                    $faltas = 0;
-                    foreach ($asistencias as $asistencia): 
-                        if ($asistencia['estado'] == 'inasistencia') {
-                            $faltastotales++;
-                            $faltas++;
-                        } elseif ($asistencia['estado'] == 'tardanza') {
-                            $faltastotales += 0.25;
-                            $tardanzas++;
-                        }
-                    ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($asistencia['fecha']); ?></td>
-                            <td><?php echo htmlspecialchars($asistencia['estado']); ?></td>
-                            <td>
-                                <?php if ($asistencia['estado'] == 'inasistencia'): ?>
-                                    <input type="checkbox" name="justificada[<?php echo $asistencia['id']; ?>]" <?php echo $asistencia['justificada'] ? 'checked' : ''; ?>>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+
+    <form method="post" action="">
+        <table id="tabla_ver" class="resultados_alumno">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Justificada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                $faltastotales = 0;
+                $tardanzas = 0;
+                $faltas = 0;
+                foreach ($asistencias as $asistencia): 
+                    if ($asistencia['estado'] == 'inasistencia') {
+                        $faltastotales++;
+                        $faltas++;
+                    } elseif ($asistencia['estado'] == 'tardanza') {
+                        $faltastotales += 0.25;
+                        $tardanzas++;
+                    }
+                ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($asistencia['fecha']); ?></td>
+                    <td><?php echo htmlspecialchars($asistencia['estado']); ?></td>
+                    <td>
+                        <?php if ($asistencia['estado'] == 'inasistencia'): ?>
+                        <input type="checkbox" name="justificada[<?php echo $asistencia['id']; ?>]" <?php echo $asistencia['justificada'] ? 'checked' : ''; ?>>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
         <p>Total de inasistencias: <?php echo $faltastotales; ?></p>
         <p>Tardanzas: <?php echo $tardanzas; ?></p>
         <p>Faltas: <?php echo $faltas; ?></p>
+
         <input type="hidden" name="nombre" value="<?php echo htmlspecialchars($alumno_ver['nombre']); ?>">
         <input type="hidden" name="apellido" value="<?php echo htmlspecialchars($alumno_ver['apellido']); ?>">
-        <input type="submit" name="actualizar" value="Actualizar Justificaciones">
+
+        <div class="botones">
+            <input type="submit" name="actualizar" value="Guardar" class="btn editar2">
+        </div>
     </form>
+
     <form method="post" action="generar_pdf.php">
         <input type="hidden" name="nombre" value="<?php echo htmlspecialchars($alumno_ver['nombre']); ?>">
         <input type="hidden" name="apellido" value="<?php echo htmlspecialchars($alumno_ver['apellido']); ?>">
         <input type="hidden" name="asistencias" value='<?php echo json_encode($asistencias); ?>'>
-    <input type="submit" name="descargar" value="Descargar en PDF">
-</form>
+        
+        <div class="botones">
+            <input type="submit" name="descargar" value="Descargar en PDF" class="btn registrar">
+        </div>
+    </form>
 </div>
 <?php endif; ?>
+
 <?php
 $conn->close();
 ?>
 
-<a href="menu.php"> <button class="btn btn-logout">Volver</button> </a>
+
+
 </body>
 </html>
