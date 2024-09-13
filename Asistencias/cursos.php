@@ -4,123 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/cursos.css">
     <title>Registro de Asistencia</title>
-    <style>
-    body {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente el contenido */
-    align-items: flex-start; /* Mantén el contenido alineado al principio verticalmente */
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f5f5f5;
-    padding: 20px;
-}
 
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 1000px;
-    width: 100%;
-    text-align: center; /* Asegura que el contenido dentro esté centrado */
-}
-
-
-        .table-container {
-            max-width: 100%;
-            overflow-x: auto;
-            margin: 0 auto;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .table th, .table td {
-            padding: 8px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        .table th {
-            background-color: #f2f2f2;
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        p {
-            font-size: 16px;
-            color: #666;
-        }
-
-        .btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-logout {
-            background-color: #dc3545;
-            width: auto;
-            display: block;
-            margin: auto;
-        }
-
-        .btn-logout:hover {
-            background-color: #c82333;
-        }
-
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .summary-table {
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .summary-table th, .summary-table td {
-            padding: 8px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        .summary-table th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .summary-table td {
-            background-color: #f9f9f9;
-        }
-    </style>
     <script>
         function marcarTodos(estado) {
             var radios = document.querySelectorAll('input[type=radio][value=' + estado + ']');
@@ -302,7 +188,7 @@ exit;
             </tr>
             <tr>
                 <th>Días hábiles</th>
-                <td <label for="dias_habiles">Días hábiles:</label>
+                <td <label for="dias_habiles"Días hábiles:</label>
                 <form method="POST">
     <input type="number" id="dias_habiles" name="dias_habiles" value="<?php echo htmlspecialchars($diasHabiles); ?>" min="1" required>
     <button class="btn" type="submit" name="actualizar_dias">Actualizar Días Hábiles</button>
