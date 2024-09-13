@@ -1,4 +1,19 @@
 <?php
+//Revisar permisos del usuario
+if (session_status() != PHP_SESSION_ACTIVE) {
+    session_start();
+  }
+if (!isset($_SESSION['usuario'])) {
+    header("Location: index.php");
+    exit;
+}
+
+// Verificar si el usuario tiene el permiso "Administrador"
+if (strpos($_SESSION['permisos'], 'Administrador') !== false) {
+    
+} else {
+    header("Location: index.php");
+}
 
 // Conexión a la base de datos
 $host = "localhost";
@@ -221,7 +236,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         
         
-        <a href="menu.php"><button class="btn btn-logout" >Volver</button></a>
+        <a href="index.php"><button class="btn btn-logout" >Volver</button></a>
 
     </div>
 </div>

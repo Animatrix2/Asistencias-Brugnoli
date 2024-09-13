@@ -16,6 +16,21 @@ $conn = new mysqli("localhost", "root", "", "registro");
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
+//Revisar permisos del usuario
+if (session_status() != PHP_SESSION_ACTIVE) {
+    session_start();
+  }
+if (!isset($_SESSION['usuario'])) {
+    header("Location: index.php");
+    exit;
+}
+
+// Verificar si el usuario tiene el permiso "Administrador"
+if (strpos($_SESSION['permisos'], 'Administrador') !== false) {
+    
+} else {
+    header("Location: index.php");
+}
 
 // Inicializar mensajes
 $msj_registrar = $msj_quitar = $msj_editar = "";
@@ -125,7 +140,7 @@ if (isset($_POST['ver'])) {
         $alumno_id = $alumno_ver['id'];
         
         // Buscar asistencias del alumno
-        $sql = "SELECT * FROM asistencias WHERE alumno_id = ? AND estado != 'asistió'";
+        $sql = "SELECT * FROM asistencias WHERE alumno_id = ? AND estado != 'asistencia'";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $alumno_id);
         $stmt->execute();
@@ -215,7 +230,7 @@ if ($result->num_rows > 0) {
 }
 $tabla .= '</table>';
 ?>
-        <a href="menu.php"> <button class="btn btn-logout">Volver</button> </a>
+        <a href="index.php"> <button class="btn btn-logout">Volver</button> </a>
 <h1>Agregar Alumnos</h1>
 <br>
 
@@ -298,7 +313,7 @@ $tabla .= '</table>';
                             <option value="1ro 3ra CB" <?php if(isset($curso) && $curso == "1ro 3ra CB") echo 'selected'; ?>>1ro 3ra CB</option>
                             <option value="1ro 4ta CB" <?php if(isset($curso) && $curso == "1ro 4ta CB") echo 'selected'; ?>>1ro 4ta CB</option>
                             <option value="1ro 5ta CB" <?php if(isset($curso) && $curso == "1ro 5ta CB") echo 'selected'; ?>>1ro 5ta CB</option>
-                            <option value="1ro 6ta CB" <?php if(isset($curso) && $curso == "1ro 5ta CB") echo 'selected'; ?>>1ro 6ta CB</option>
+                            <option value="1ro 6ta CB" <?php if(isset($curso) && $curso == "1ro 6ta CB") echo 'selected'; ?>>1ro 6ta CB</option>
                             <option value="1ro 7ma CB" <?php if(isset($curso) && $curso == "1ro 7ma CB") echo 'selected'; ?>>1ro 7ma CB</option>
                             <option value="2do 1ra CB" <?php if(isset($curso) && $curso == "2do 1ra CB") echo 'selected'; ?>>2do 1ra CB</option>
                             <option value="2do 2da CB" <?php if(isset($curso) && $curso == "2do 2da CB") echo 'selected'; ?>>2do 2da CB</option>

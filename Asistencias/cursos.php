@@ -26,6 +26,11 @@ if (session_status() != PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+if (!isset($_SESSION['usuario'])) {
+    header("Location: index.php");
+    exit;
+}
+
 // Establecer conexión a la base de datos
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=registro", "root", "");
@@ -35,16 +40,22 @@ try {
     exit;
 }
 
-// Obtener los permisos del usuario desde la sesión
-$permisos_usuario = explode(',', $_SESSION['permisos']);
+// Verificar los cursos a los que el usuario tiene acceso
+$permisos = explode(',', $_SESSION['permisos']); 
 
 // Verificar si el usuario tiene acceso al curso
-if (in_array($curso, $permisos_usuario) OR (in_array("Administrador", $permisos_usuario))) {
+
+if (!in_array("Administrador", $permisos) && !in_array($curso, $permisos)) {
+    echo "No tienes permiso para ver este curso.";
+    exit;
+}
+
 
     // Obtener los alumnos del curso
-    $stmt = $pdo->prepare("SELECT id, nombre, apellido FROM alumnos WHERE curso = :curso");
+    $stmt = $pdo->prepare("SELECT id, nombre, apellido, sexo FROM alumnos WHERE curso = :curso");
     $stmt->execute(['curso' => $curso]);
     $alumnos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
     // Obtener las últimas asistencias registradas para cada alumno
     $asistencias_tot = [];
@@ -81,6 +92,7 @@ if (in_array($curso, $permisos_usuario) OR (in_array("Administrador", $permisos_
 // Obtener el número de días hábiles introducido por el usuario
 $diasHabiles = isset($_POST['dias_habiles']) ? (int)$_POST['dias_habiles'] : 1;
 
+
 $stmt = $pdo->prepare("
     SELECT al.sexo, a.estado, COUNT(*) as total
     FROM asistencias a
@@ -99,21 +111,44 @@ $asistencias = [
 ];
 
 foreach ($asistenciaData as $data) {
+    if (isset($data['sexo'], $data['estado'], $data['total'])) {
+        $asistencias[$data['sexo']][$data['estado']] = $data['total'];
+    }
+}
+
+// Contar alumnos totales, varones y mujeres
+$totalAlumnos = count($alumnos);
+$totalVarones = 0;
+$totalMujeres = 0;
+
+foreach ($asistenciaData as $data) {
     $asistencias[$data['sexo']][$data['estado']] = $data['total'];
 }
 
+foreach ($alumnos as $alumno) {
+    if (isset($alumno['sexo']) && $alumno['sexo'] === 'Masculino') {
+        $totalVarones++;
+    } elseif (isset($alumno['sexo']) && $alumno['sexo'] === 'Femenino') {
+        $totalMujeres++;
+    }
+}
+
+
+$calculoTotal = $totalAlumnos * $diasHabiles;
+$calculoVarones = $totalVarones * $diasHabiles;
+$calculoMujeres = $totalMujeres * $diasHabiles;
+
 $totalAsistencias = $asistencias['Masculino']['asistencia'] + $asistencias['Femenino']['asistencia'];
 $totalInasistencias = $asistencias['Masculino']['inasistencia'] + $asistencias['Masculino']['tardanza'] * 0.25 + $asistencias['Femenino']['inasistencia'] + $asistencias['Femenino']['tardanza'] * 0.25;
-$asistenciaMedia = $totalAsistencias / $diasHabiles;
+$asistenciaMedia = ($diasHabiles > 0 && $totalAlumnos > 0) ? $totalAsistencias / $diasHabiles : 0;
 
-$porcentajeAsistenciasVarones = ($asistencias['Masculino']['asistencia'] / ($diasHabiles * count($alumnos))) * 100;
-$porcentajeAsistenciasMujeres = ($asistencias['Femenino']['asistencia'] / ($diasHabiles * count($alumnos))) * 100;
-$porcentajeTotalAsistencias = ($totalAsistencias / ($diasHabiles * count($alumnos))) * 100;
 
-} else {
-echo "No tiene permiso para ver este curso.";
-exit;
-}
+// Cálculo de porcentajes de asistencia
+$porcentajeAsistenciasVarones = ($calculoVarones > 0) ? ($asistencias['Masculino']['asistencia'] * 100) / $calculoVarones : 0;
+$porcentajeAsistenciasMujeres = ($calculoMujeres > 0) ? ($asistencias['Femenino']['asistencia'] * 100) / $calculoMujeres : 0;
+$porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / $calculoTotal : 0;
+
+
 ?>
         <h1>Registro de Asistencia - Curso <?php echo htmlspecialchars($curso); ?></h1>
         <form method="POST">
@@ -131,11 +166,11 @@ exit;
                             <td>
                                 <label>
                                     <input type="radio" name="estado[<?php echo $alumno['id']; ?>]" value="asistencia" <?php if ($asistencias_tot[$alumno['id']] === 'asistencia' || $asistencias_tot[$alumno['id']] === null) echo 'checked'; ?>>
-                                    asistencia
+                                    Asistencia
                                 </label>
                                 <label>
                                     <input type="radio" name="estado[<?php echo $alumno['id']; ?>]" value="inasistencia" <?php if ($asistencias_tot[$alumno['id']] === 'inasistencia') echo 'checked'; ?>>
-                                    inasistencia
+                                    Inasistencia
                                 </label>
                                 <label>
                                     <input type="radio" name="estado[<?php echo $alumno['id']; ?>]" value="tardanza" <?php if ($asistencias_tot[$alumno['id']] === 'tardanza') echo 'checked'; ?>>

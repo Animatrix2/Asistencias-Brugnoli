@@ -131,7 +131,7 @@ $_SESSION["curso"] = $curso;
     </script>
 </head>
 <body>
-<a href="menu.php"><button class="btn btn-logout">Volver</button></a>
+<a href="index.php"><button class="btn btn-logout">Volver</button></a>
 <br>
     <div class="container">
         <h2>Seleccione un curso</h2>
