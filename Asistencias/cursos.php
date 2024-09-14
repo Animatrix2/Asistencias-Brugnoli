@@ -92,17 +92,22 @@ if (!in_array("Administrador", $permisos) && !in_array($curso, $permisos)) {
 // Obtener el número de días hábiles introducido por el usuario
 $diasHabiles = isset($_POST['dias_habiles']) ? (int)$_POST['dias_habiles'] : 1;
 
+$mesSeleccionado = isset($_POST['mes_anio']) ? explode('-', $_POST['mes_anio'])[1] : date('m');
+$anioSeleccionado = isset($_POST['mes_anio']) ? explode('-', $_POST['mes_anio'])[0] : date('Y');
+
+
 
 $stmt = $pdo->prepare("
     SELECT al.sexo, a.estado, COUNT(*) as total
     FROM asistencias a
     JOIN alumnos al ON a.alumno_id = al.id
     WHERE al.curso = :curso
-    AND MONTH(a.fecha) = MONTH(CURRENT_DATE)
-    AND YEAR(a.fecha) = YEAR(CURRENT_DATE)
+    AND MONTH(a.fecha) = :mes
+    AND YEAR(a.fecha) = :anio
     GROUP BY al.sexo, a.estado
 ");
-$stmt->execute(['curso' => $curso]);
+$stmt->execute(['curso' => $curso, 'mes' => $mesSeleccionado, 'anio' => $anioSeleccionado]);
+
 $asistenciaData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $asistencias = [
@@ -149,6 +154,9 @@ $porcentajeAsistenciasMujeres = ($calculoMujeres > 0) ? ($asistencias['Femenino'
 $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / $calculoTotal : 0;
 
 
+
+
+
 ?>
         <h1>Registro de Asistencia - Curso <?php echo htmlspecialchars($curso); ?></h1>
         <form method="POST">
@@ -192,6 +200,8 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 
 
         <h2>Resumen de Asistencias del Curso en el Mes Actual</h2>
+       
+
         <table class="summary-table">
             <tr>
                 <th></th>
@@ -218,17 +228,37 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
                 <td><?php echo htmlspecialchars(number_format($porcentajeTotalAsistencias, 2)); ?>%</td>
             </tr>
             <tr>
-                <th>Asistencia Media</th>
+                <th >Asistencia Media</th>
                 <td colspan="3"><?php echo htmlspecialchars(number_format($asistenciaMedia, 2)); ?></td>
             </tr>
             <tr>
-                <th>Días hábiles</th>
+                <th></th>
                 <td <label for="dias_habiles"Días hábiles:</label>
                 <form method="POST">
-    <input type="number" id="dias_habiles" name="dias_habiles" value="<?php echo htmlspecialchars($diasHabiles); ?>" min="1" required>
-    <button class="btn" type="submit" name="actualizar_dias">Actualizar Días Hábiles</button>
-</form>
+                Cantidad de Días hábiles<input type="number" id="dias_habiles" name="dias_habiles" value="<?php echo htmlspecialchars($diasHabiles); ?>" min="1" required>
+
 </td>
+<td>
+
+    <label for="mes_anio">Selecciona el mes y año:</label>
+    <select name="mes_anio" id="mes_anio">
+        <?php
+        // Mostrar los últimos 12 meses para selección
+        for ($i = 0; $i < 12; $i++) {
+            $fecha = strtotime("-$i months");
+            $mesAnio = date('Y-m', $fecha);
+            $textoMesAnio = date('F Y', $fecha);
+            $selected = ($mesAnio === "$anioSeleccionado-$mesSeleccionado") ? 'selected' : '';
+            echo "<option value='$mesAnio' $selected>$textoMesAnio</option>";
+        }
+        ?>
+    </select>
+    </td>
+    <td>
+    <button class="btn" type="submit">Actualizar</button>
+    </td>
+</form>
+
             </tr>
         </table>
 
