@@ -242,17 +242,27 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 
     <label for="mes_anio">Selecciona el mes y año:</label>
     <select name="mes_anio" id="mes_anio">
-        <?php
-        // Mostrar los últimos 12 meses para selección
-        for ($i = 0; $i < 12; $i++) {
-            $fecha = strtotime("-$i months");
-            $mesAnio = date('Y-m', $fecha);
-            $textoMesAnio = date('F Y', $fecha);
-            $selected = ($mesAnio === "$anioSeleccionado-$mesSeleccionado") ? 'selected' : '';
-            echo "<option value='$mesAnio' $selected>$textoMesAnio</option>";
-        }
-        ?>
-    </select>
+    <?php
+    // Arreglo con los meses en español
+    $mesesEspañol = [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+
+    // Mostrar los últimos 12 meses para selección
+    for ($i = 0; $i < 12; $i++) {
+        $fecha = strtotime("-$i months");
+        $mes = date('n', $fecha) - 1; // Restar 1 porque los arrays en PHP empiezan en 0
+        $anio = date('Y', $fecha);
+        $mesAnio = date('Y-m', $fecha);
+        $textoMesAnio = $mesesEspañol[$mes] . ' ' . $anio;
+        $selected = ($mesAnio === "$anioSeleccionado-$mesSeleccionado") ? 'selected' : '';
+        echo "<option value='$mesAnio' $selected>$textoMesAnio</option>";
+    }
+    ?>
+</select>
+
+
     </td>
     <td>
     <button class="btn" type="submit">Actualizar</button>
