@@ -293,6 +293,21 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 
             </tr>
         </table>
+        <form action="generar_pdf_estadisticas.php" method="POST" target="_blank">
+    <input type="hidden" name="curso" value="<?php echo htmlspecialchars($curso); ?>">
+    <input type="hidden" name="mes_anio" value="<?php echo htmlspecialchars($mesesEspañol[$mesSeleccionado - 1] . ' ' . $anioSeleccionado); ?>">
+    <input type="hidden" name="asistencias_varones" value="<?php echo htmlspecialchars($asistencias['Masculino']['asistencia']); ?>">
+    <input type="hidden" name="asistencias_mujeres" value="<?php echo htmlspecialchars($asistencias['Femenino']['asistencia']); ?>">
+    <input type="hidden" name="inasistencias_varones" value="<?php echo htmlspecialchars($asistencias['Masculino']['inasistencia']); ?>">
+    <input type="hidden" name="inasistencias_mujeres" value="<?php echo htmlspecialchars($asistencias['Femenino']['inasistencia']); ?>">
+    <input type="hidden" name="tardanzas_varones" value="<?php echo htmlspecialchars($asistencias['Masculino']['tardanza']); ?>">
+    <input type="hidden" name="tardanzas_mujeres" value="<?php echo htmlspecialchars($asistencias['Femenino']['tardanza']); ?>">
+    <input type="hidden" name="porcentaje_varones" value="<?php echo htmlspecialchars(number_format($porcentajeAsistenciasVarones, 2)); ?>">
+    <input type="hidden" name="porcentaje_mujeres" value="<?php echo htmlspecialchars(number_format($porcentajeAsistenciasMujeres, 2)); ?>">
+    <input type="hidden" name="porcentaje_total" value="<?php echo htmlspecialchars(number_format($porcentajeTotalAsistencias, 2)); ?>">
+    <input type="hidden" name="asistencia_media" value="<?php echo htmlspecialchars($asistenciaMedia); ?>">    
+    <button type="submit" class="btn">Descargar Resumen en PDF</button>
+</form>
 
     </div>
 </body>
