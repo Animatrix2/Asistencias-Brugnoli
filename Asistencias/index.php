@@ -30,15 +30,13 @@
         <div class="container">
             <div class="content">
                 <a href="cursos.php"><button class="btn">Ver cursos</button></a>
-                
+                <a href="agregar_alumnos.php"><button class="btn">Administrar alumnos</button></a>
                 <?php
                     // Verificar si el usuario tiene el permiso de administrador
                     if (isset($_SESSION["permisos"]) && strpos($_SESSION["permisos"], 'Administrador') !== false) {
                       echo  '<a href="cuentas.php"><button class="btn">Administrar cuentas</button></a>';
                     }
                 ?>
-
-                <a href="agregar_alumnos.php"><button class="btn">Administrar alumnos</button></a>
                 <a href="cambiar_contraseña"><button class="btn">Cambiar contraseña</button></a>
                 <a href="logout.php"><button class="btn btn-logout">Cerrar sesión</button></a>
             </div>

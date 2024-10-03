@@ -37,7 +37,8 @@ body {
 }
 
 .table th {
-    background-color: #f2f2f2;
+    background-color: #322c88;
+    color:white;
 }
 
 h1, h2 {
@@ -95,4 +96,20 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.verde{
+    background-color: #1bb355; ;
+}
+
+.verde:hover{
+    background-color: #11853e;
+}
+
+.rojo{
+    background-color: #c82333 ;
+}
+
+.rojo:hover{
+    background-color: #9b1a27;
 }

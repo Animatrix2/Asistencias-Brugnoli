@@ -251,4 +251,15 @@ table tr:hover {
 .header td{
     text-align: center;
     font-weight: bold;
+
+}
+
+.orange-name {
+    color: rgb(236, 128, 56);
+    font-weight: bold;
+}
+
+.red-name {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
 }
