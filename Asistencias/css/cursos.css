@@ -1,12 +1,11 @@
 body {
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Cambiado de center a flex-start */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: flex-start; /* Mantén el contenido alineado al principio verticalmente */
     min-height: 100vh;
-    max-width: auto;
     margin: 0;
     background-color: #f5f5f5;
-    padding: 20px; /* Añadir un padding para evitar que el contenido quede pegado al borde superior */
+    padding: 20px;
 }
 
 .container {
@@ -14,102 +13,117 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 1000px; /* Ajusta a un valor mayor si quieres más ancho */
+    max-width: 1000px;
     width: 100%;
+    text-align: center; /* Asegura que el contenido dentro esté centrado */
 }
 
 
-.table-container {
-    max-width: 100%;
-    overflow-x: auto;
-    margin: 0 auto;
-}
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto;
+        }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-}
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
 
-.table th, .table td {
-    padding: 8px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
+        .table th, .table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
 
-.table th {
-    background-color: #322c88;
-    color:white;
-}
-
-h1, h2 {
-    text-align: center;
-}
-
-/* Resetear estilos predeterminados del navegador */
+        .summary-table th, .table th {
+            background-color: #00438b;
+            color: white;
+        }
 
 
-.saludo {
-    display:grid;
-    margin-bottom: 20px;
-}
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
 
-h1 {
-    font-size: 24px;
-    color: #333;
-}
+        p {
+            font-size: 16px;
+            color: #666;
+        }
 
-p {
-    font-size: 16px;
-    color: #666;
-}
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            width: 100%;
+        }
 
-.btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-    width: 100%;
-}
+        .btn:hover {
+            background-color: #0056b3;
+        }
 
-.btn:hover {
-    background-color: #0056b3;
-}
+        .btn-logout {
+            background-color: #dc3545;
+            width: auto;
+            display: block;
+            margin: auto;
+        }
 
-.btn-logout {
-    background-color: #dc3545;
-    width:auto;
-    display:block;
-    margin: auto;
-}
+        .btn-logout:hover {
+            background-color: #c82333;
+        }
 
-.btn-logout:hover {
-    background-color: #c82333;
-}
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
-.verde{
-    background-color: #1bb355; ;
-}
+        .summary-table {
+            width: 100%;
+            margin-top: 20px;
+        }
 
-.verde:hover{
-    background-color: #11853e;
-}
+        .summary-table th, .summary-table td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
 
-.rojo{
-    background-color: #c82333 ;
-}
+   
 
-.rojo:hover{
-    background-color: #9b1a27;
-}
+        .summary-table td {
+            background-color: #f9f9f9;
+        }
+        
+        .red-name td {
+            color: red; /* Rojo para 20 o más inasistencias */
+        }
+        
+        .orange-name td {
+            color: orange; /* Naranja para entre 15 y 19 inasistencias */
+        }
+
+        .alert-box{ 
+            color: #a94442; 
+            font-size: 18px; 
+            padding: 20px; 
+            margin: 20px; 
+            border-radius: 5px; 
+          } 

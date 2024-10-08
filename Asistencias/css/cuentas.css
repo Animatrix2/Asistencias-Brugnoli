@@ -176,6 +176,10 @@ table tr:hover {
     transition: background-color 0.3s ease;
     display: inline-block;
     width: 150px;
+    background-color: #dc3545;
+    width:auto;
+    display:block;
+    margin: auto;
 }
 
 .editar2{
@@ -208,4 +212,48 @@ table tr:hover {
 .header td{
     text-align: center;
     font-weight: bold;
+}
+.opciones td{
+    vertical-align: top;
+}
+
+.opciones {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.opciones td {
+    vertical-align: top;
+    padding: 10px;
+}
+
+.opciones strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilos responsivos para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .opciones {
+        display: block;
+    }
+
+    .opciones td {
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+        margin-left:25%
+    }
+
+    .opciones div {
+        margin-bottom: 15px;
+    }
+
+    .opciones strong {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
 }

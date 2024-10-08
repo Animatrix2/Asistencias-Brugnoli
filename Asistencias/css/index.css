@@ -16,6 +16,10 @@ body {
     text-align: center;
 }
 
+table{
+    border: 0;
+}
+
 .container {
     background-color: #fff;
     padding: 20px;
@@ -70,4 +74,8 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.titulo{
+    text-align: center;
 }
