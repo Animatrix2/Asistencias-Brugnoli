@@ -6,6 +6,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $apellido = htmlspecialchars($_POST['apellido']);
     $asistencias = json_decode($_POST['asistencias'], true);
 
+    function quitarTildes($texto) {
+        $buscar = ['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'];
+        $reemplazar = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+        return str_replace($buscar, $reemplazar, $texto);
+    }
+
+    // Aplicar la función para quitar tildes en nombre y apellido
+    $nombre = quitarTildes($nombre);
+    $apellido = quitarTildes($apellido);
+
     class PDF extends FPDF {
         // Header
         function Header() {
@@ -21,23 +31,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->SetFont('Arial', 'I', 8);
             $this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
         }
+
+        // Centrar la tabla
+        function CenterTable($tableWidth) {
+            $pageWidth = $this->GetPageWidth(); // Ancho de la página
+            $x = ($pageWidth - $tableWidth) / 2; // Calcular el margen izquierdo
+            $this->SetX($x);
+        }
     }
 
     $pdf = new PDF();
     $pdf->AddPage();
     $pdf->SetFont('Arial', '', 12);
 
-    // Table Header
-    $pdf->Cell(40, 10, 'Fecha', 1);
-    $pdf->Cell(40, 10, 'Estado', 1);
-    $pdf->Cell(40, 10, 'Justificada', 1);
+    // Definir el ancho total de la tabla
+    $tableWidth = 120; // 40 (ancho de cada columna) * 3 columnas
+
+    // Table Header (centrada)
+    $pdf->CenterTable($tableWidth);
+    $pdf->Cell(40, 10, 'Fecha', 1, 0, 'C');
+    $pdf->Cell(40, 10, 'Estado', 1, 0, 'C');
+    $pdf->Cell(40, 10, 'Justificada', 1, 0, 'C');
     $pdf->Ln();
 
-    // Table Body
+
+
+    // Table Body (centrada)
     foreach ($asistencias as $asistencia) {
-        $pdf->Cell(40, 10, htmlspecialchars($asistencia['fecha']), 1);
-        $pdf->Cell(40, 10, htmlspecialchars($asistencia['estado']), 1);
-        $pdf->Cell(40, 10, $asistencia['estado'] == 'faltó' ? ($asistencia['justificada'] ? 'Sí' : 'No') : '-', 1);
+        // Convertir la fecha a formato DD-MM-AAAA
+        $fechaFormateada = date('d-m-Y', strtotime($asistencia['fecha']));
+
+        $pdf->CenterTable($tableWidth);
+        $pdf->Cell(40, 10, quitarTildes($fechaFormateada), 1, 0, 'C'); // Fecha en formato DD-MM-AAAA
+        $pdf->Cell(40, 10, quitarTildes(htmlspecialchars($asistencia['estado'])), 1, 0, 'C');
+        $pdf->Cell(40, 10, $asistencia['estado'] == 'inasistencia' ? ($asistencia['justificada'] ? 'SI' : 'NO') : '-', 1, 0, 'C');
         $pdf->Ln();
     }
 
