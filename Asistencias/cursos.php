@@ -91,10 +91,10 @@ if (!in_array("Administrador", $permisos) && !in_array($curso, $permisos)) {
             }
 
             $pdo->commit();
-            echo "<script>alert('Asistencia registrada correctamente.');</script>";
+            echo "Asistencia registrada correctamente.";
         } catch (PDOException $e) {
             $pdo->rollBack();
-            echo "<script>alert('Error al registrar la asistencia.');</script>";
+            echo "Error al registrar la asistencia: " . $e->getMessage();
         }
     }
 
@@ -167,7 +167,8 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 
 
 ?>
-        <h1>Registro de Asistencia - Curso <?php echo htmlspecialchars($curso); ?></h1>
+        <h1>Registro de Asistencias</h1>
+        <h1> <?php echo htmlspecialchars($curso); ?></h1>
         <form method="POST">
             <div class="table-container">
                 <table class="table">
@@ -186,7 +187,7 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
                             $class = '';
                             if ($total_absences >= 20) {
                                 $class = 'red-name'; // Rojo si tiene 20 o más inasistencias
-                            } elseif ($total_absences >= 15) {
+                            } elseif ($total_absences >= 10) {
                                 $class = 'orange-name'; // Naranja si tiene entre 15 y 19 inasistencias
                             }
                         ?>
@@ -215,16 +216,16 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
         </form>
 
         <div class="btn-group">
-            <button class="btn" onclick="marcarTodos('asistencia')">Marcar Asistencia para Todos</button>
-            <button class="btn" onclick="marcarTodos('inasistencia')">Marcar Falta para Todos</button>
+            <button class="btn verde" onclick="marcarTodos('asistencia')">Marcar Asistencia para Todos</button>
+            <button class="btn rojo" onclick="marcarTodos('inasistencia')">Marcar Falta para Todos</button>
         </div>
 
 
 
-        <h2>Resumen de Asistencias del Curso en el Mes Actual</h2>
+        <h2>Resumen de Asistencias</h2>
        
 
-        <table class="summary-table">
+        <table class="table summary-table" border="1">
             <tr>
                 <th></th>
                 <th>Varones</th>
@@ -244,20 +245,20 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
                 <td><?php echo htmlspecialchars(number_format($totalInasistencias, 2)); ?></td>
             </tr>
             <tr>
-                <td>Porcentaje de Asistencias</td>
+                <th>Porcentaje de Asistencias</th>
                 <td><?php echo htmlspecialchars(number_format($porcentajeAsistenciasVarones, 2)); ?>%</td>
                 <td><?php echo htmlspecialchars(number_format($porcentajeAsistenciasMujeres, 2)); ?>%</td>
                 <td><?php echo htmlspecialchars(number_format($porcentajeTotalAsistencias, 2)); ?>%</td>
             </tr>
             <tr>
                 <th >Asistencia Media</th>
-                <td colspan="3"><?php echo htmlspecialchars(number_format($asistenciaMedia, 2)); ?></td>
+                <td colspan="3" style="text-align:center;"><?php echo htmlspecialchars(number_format($asistenciaMedia, 2)); ?></td>
             </tr>
             <tr>
                 <th></th>
                 <td <label for="dias_habiles"Días hábiles:</label>
                 <form method="POST">
-                Cantidad de Días hábiles<input type="number" id="dias_habiles" name="dias_habiles" value="<?php echo htmlspecialchars($diasHabiles); ?>" min="1" required>
+                Cantidad de Días Hábiles<input type="number" id="dias_habiles" name="dias_habiles" value="<?php echo htmlspecialchars($diasHabiles); ?>" min="1" required>
 
 </td>
 <td>
@@ -293,6 +294,21 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 
             </tr>
         </table>
+        <form action="generar_pdf_estadisticas.php" method="POST" target="_blank">
+    <input type="hidden" name="curso" value="<?php echo htmlspecialchars($curso); ?>">
+    <input type="hidden" name="mes_anio" value="<?php echo htmlspecialchars($mesesEspañol[$mesSeleccionado - 1] . ' ' . $anioSeleccionado); ?>">
+    <input type="hidden" name="asistencias_varones" value="<?php echo htmlspecialchars($asistencias['Masculino']['asistencia']); ?>">
+    <input type="hidden" name="asistencias_mujeres" value="<?php echo htmlspecialchars($asistencias['Femenino']['asistencia']); ?>">
+    <input type="hidden" name="inasistencias_varones" value="<?php echo htmlspecialchars($asistencias['Masculino']['inasistencia']); ?>">
+    <input type="hidden" name="inasistencias_mujeres" value="<?php echo htmlspecialchars($asistencias['Femenino']['inasistencia']); ?>">
+    <input type="hidden" name="tardanzas_varones" value="<?php echo htmlspecialchars($asistencias['Masculino']['tardanza']); ?>">
+    <input type="hidden" name="tardanzas_mujeres" value="<?php echo htmlspecialchars($asistencias['Femenino']['tardanza']); ?>">
+    <input type="hidden" name="porcentaje_varones" value="<?php echo htmlspecialchars(number_format($porcentajeAsistenciasVarones, 2)); ?>">
+    <input type="hidden" name="porcentaje_mujeres" value="<?php echo htmlspecialchars(number_format($porcentajeAsistenciasMujeres, 2)); ?>">
+    <input type="hidden" name="porcentaje_total" value="<?php echo htmlspecialchars(number_format($porcentajeTotalAsistencias, 2)); ?>">
+    <input type="hidden" name="asistencia_media" value="<?php echo htmlspecialchars($asistenciaMedia); ?>">    
+    <button type="submit" class="btn">Descargar Resumen en PDF</button>
+</form>
 
     </div>
 </body>
