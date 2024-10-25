@@ -274,57 +274,53 @@
                     <select name="filtro_curso" id="filtro_curso">
                         <option value="">Todos</option>
                         <optgroup label="Ciclo Básico">
-                            <option value="1ro 1ra CB">1ro 1ra CB</option>
-                            <option value="1ro 2da CB">1ro 2da CB</option>
-                            <option value="1ro 3ra CB">1ro 3ra CB</option>
-                            <option value="1ro 4ta CB">1ro 4ta CB</option>
-                            <option value="1ro 5ta CB">1ro 5ta CB</option>
-                            <option value="1ro 6ta CB">1ro 6ta CB</option>
-                            <option value="1ro 7ma CB">1ro 7ma CB</option>
-                            <option value="2do 1ra CB">2do 1ra CB</option>
-                            <option value="2do 2da CB">2do 2da CB</option>
-                            <option value="2do 3ra CB">2do 3ra CB</option>
-                            <option value="2do 4ta CB">2do 4ta CB</option>
-                            <option value="2do 5ta CB">2do 5ta CB</option>
+                            <option value="1ro 1ra CB" ' . (isset($filtro_curso) && $filtro_curso == "1ro 1ra CB" ? "selected" : "") . '>1ro 1ra CB</option>
+                            <option value="1ro 2da CB" ' . (isset($filtro_curso) && $filtro_curso == "1ro 2da CB" ? "selected" : "") . '>1ro 2da CB</option>
+                            <option value="1ro 3ra CB" ' . (isset($filtro_curso) && $filtro_curso == "1ro 3ra CB" ? "selected" : "") . '>1ro 3ra CB</option>
+                            <option value="1ro 4ta CB" ' . (isset($filtro_curso) && $filtro_curso == "1ro 4ta CB" ? "selected" : "") . '>1ro 4ta CB</option>
+                            <option value="1ro 5ta CB" ' . (isset($filtro_curso) && $filtro_curso == "1ro 5ta CB" ? "selected" : "") . '>1ro 5ta CB</option>
+                            <option value="1ro 6ta CB" ' . (isset($filtro_curso) && $filtro_curso == "1ro 6ta CB" ? "selected" : "") . '>1ro 6ta CB</option>
+                            <option value="1ro 7ma CB" ' . (isset($filtro_curso) && $filtro_curso == "1ro 7ma CB" ? "selected" : "") . '>1ro 7ma CB</option>
+                            <option value="2do 1ra CB" ' . (isset($filtro_curso) && $filtro_curso == "2do 1ra CB" ? "selected" : "") . '>2do 1ra CB</option>
+                            <option value="2do 2da CB" ' . (isset($filtro_curso) && $filtro_curso == "2do 2da CB" ? "selected" : "") . '>2do 2da CB</option>
+                            <option value="2do 3ra CB" ' . (isset($filtro_curso) && $filtro_curso == "2do 3ra CB" ? "selected" : "") . '>2do 3ra CB</option>
+                            <option value="2do 4ta CB" ' . (isset($filtro_curso) && $filtro_curso == "2do 4ta CB" ? "selected" : "") . '>2do 4ta CB</option>
+                            <option value="2do 5ta CB" ' . (isset($filtro_curso) && $filtro_curso == "2do 5ta CB" ? "selected" : "") . '>2do 5ta CB</option>
                         </optgroup>
                         <optgroup label="IPP">
-                            <option value="1ro 1ra IPP">1ro 1ra IPP</option>
-                            <option value="1ro 2da IPP">1ro 2da IPP</option>
-                            <option value="2do 1ra IPP">2do 1ra IPP</option>
-                            <option value="2do 2da IPP">2do 2da IPP</option>
-                            <option value="3ro 1ra IPP">3ro 1ra IPP</option>
-                            <option value="3ro 2da IPP">3ro 2da IPP</option>
-                            <option value="4to 1ra IPP">4to 1ra IPP</option>
-                            <option value="4to 2da IPP">4to 2da IPP</option>
+                            <option value="1ro 1ra IPP" ' . (isset($filtro_curso) && $filtro_curso == "1ro 1ra IPP" ? "selected" : "") . '>1ro 1ra IPP</option>
+                            <option value="1ro 2da IPP" ' . (isset($filtro_curso) && $filtro_curso == "1ro 2da IPP" ? "selected" : "") . '>1ro 2da IPP</option>
+                            <option value="2do 1ra IPP" ' . (isset($filtro_curso) && $filtro_curso == "2do 1ra IPP" ? "selected" : "") . '>2do 1ra IPP</option>
+                            <option value="2do 2da IPP" ' . (isset($filtro_curso) && $filtro_curso == "2do 2da IPP" ? "selected" : "") . '>2do 2da IPP</option>
+                            <option value="3ro 1ra IPP" ' . (isset($filtro_curso) && $filtro_curso == "3ro 1ra IPP" ? "selected" : "") . '>3ro 1ra IPP</option>
+                            <option value="3ro 2da IPP" ' . (isset($filtro_curso) && $filtro_curso == "3ro 2da IPP" ? "selected" : "") . '>3ro 2da IPP</option>
+                            <option value="4to 1ra IPP" ' . (isset($filtro_curso) && $filtro_curso == "4to 1ra IPP" ? "selected" : "") . '>4to 1ra IPP</option>
+                            <option value="4to 2da IPP" ' . (isset($filtro_curso) && $filtro_curso == "4to 2da IPP" ? "selected" : "") . '>4to 2da IPP</option>
                         </optgroup>
                         <optgroup label="GAO">
-                            <option value="1ro 1ra GAO">1ro 1ra GAO</option>
-                            <option value="1ro 2da GAO">1ro 2da GAO</option>
-                            <option value="1ro 3ra GAO">1ro 3ra GAO</option>
-                            <option value="1ro 4ta GAO">1ro 4ta GAO</option>
-                            <option value="2do 1ra GAO">2do 1ra GAO</option>
-                            <option value="2do 2da GAO">2do 2da GAO</option>
-                            <option value="2do 3ra GAO">2do 3ra GAO</option>
-                            <option value="2do 4ta GAO">2do 4ta GAO</option>
-                            <option value="3ro 1ra GAO">3ro 1ra GAO</option>
-                            <option value="3ro 2da GAO">3ro 2da GAO</option>
-                            <option value="3ro 3ra GAO">3ro 3ra GAO</option>
-                            <option value="3ro 4ta GAO">3ro 4ta GAO</option>
-                            <option value="4to 1ra GAO">4to 1ra GAO</option>
-                            <option value="4to 2da GAO">4to 2da GAO</option>
-                            <option value="4to 3ra GAO">4to 3ra GAO</option>
-                            <option value="4to 4ta GAO">4to 4ta GAO</option>
+                            <option value="1ro 1ra GAO" ' . (isset($filtro_curso) && $filtro_curso == "1ro 1ra GAO" ? "selected" : "") . '>1ro 1ra GAO</option>
+                            <option value="1ro 2da GAO" ' . (isset($filtro_curso) && $filtro_curso == "1ro 2da GAO" ? "selected" : "") . '>1ro 2da GAO</option>
+                            <option value="1ro 3ra GAO" ' . (isset($filtro_curso) && $filtro_curso == "1ro 3ra GAO" ? "selected" : "") . '>1ro 3ra GAO</option>
+                            <option value="2do 1ra GAO" ' . (isset($filtro_curso) && $filtro_curso == "2do 1ra GAO" ? "selected" : "") . '>2do 1ra GAO</option>
+                            <option value="2do 2da GAO" ' . (isset($filtro_curso) && $filtro_curso == "2do 2da GAO" ? "selected" : "") . '>2do 2da GAO</option>
+                            <option value="2do 3ra GAO" ' . (isset($filtro_curso) && $filtro_curso == "2do 3ra GAO" ? "selected" : "") . '>2do 3ra GAO</option>
+                            <option value="3ro 1ra GAO" ' . (isset($filtro_curso) && $filtro_curso == "3ro 1ra GAO" ? "selected" : "") . '>3ro 1ra GAO</option>
+                            <option value="3ro 2da GAO" ' . (isset($filtro_curso) && $filtro_curso == "3ro 2da GAO" ? "selected" : "") . '>3ro 2da GAO</option>
+                            <option value="3ro 3ra GAO" ' . (isset($filtro_curso) && $filtro_curso == "3ro 3ra GAO" ? "selected" : "") . '>3ro 3ra GAO</option>
+                            <option value="4to 1ra GAO" ' . (isset($filtro_curso) && $filtro_curso == "4to 1ra GAO" ? "selected" : "") . '>4to 1ra GAO</option>
+                            <option value="4to 2da GAO" ' . (isset($filtro_curso) && $filtro_curso == "4to 2da GAO" ? "selected" : "") . '>4to 2da GAO</option>
+                            <option value="4to 3ra GAO" ' . (isset($filtro_curso) && $filtro_curso == "4to 3ra GAO" ? "selected" : "") . '>4to 3ra GAO</option>
                         </optgroup>
                         <optgroup label="TEP">
-                            <option value="1ro 1ra TEP">1ro 1ra TEP</option>
-                            <option value="2do 1ra TEP">2do 1ra TEP</option>
-                            <option value="3ro 1ra TEP">3ro 1ra TEP</option>
-                            <option value="4to 1ra TEP">4to 1ra TEP</option>
+                            <option value="1ro 1ra TEP" ' . (isset($filtro_curso) && $filtro_curso == "1ro 1ra TEP" ? "selected" : "") . '> 1ro 1ra TEP</option>
+                            <option value="2do 1ra TEP" ' . (isset($filtro_curso) && $filtro_curso == "2do 1ra TEP" ? "selected" : "") . '>2do 1ra TEP</option>
+                            <option value="3ro 1ra TEP" ' . (isset($filtro_curso) && $filtro_curso == "3ro 1ra TEP" ? "selected" : "") . '>3ro 1ra TEP</option>
+                            <option value="4to 1ra TEP" ' . (isset($filtro_curso) && $filtro_curso == "4to 1ra TEP" ? "selected" : "") . '>4to 1ra TEP</option>
                         </optgroup>
                     </select>
     
                     <label for="filtro_nombre">Valor:</label>
-                    <input type="text" name="filtro_nombre" id="filtro_nombre" placeholder="Nombre, apellido o DNI">
+                    <input type="text" name="filtro_nombre" id="filtro_nombre" placeholder="Nombre, apellido o DNI" value="' . (isset($filtro_nombre) ? htmlspecialchars($filtro_nombre) : '') . '">
                     <input type="submit" value="Filtrar">
                 </form>
             </div>
@@ -345,7 +341,7 @@
             <div class="formularios">
                 <form action="" method="post">
                     <table class="formulario">
-                        <h2>Editar Alumno</h2>
+                        <h2>Agregar/Editar Alumno</h2>
                         <tr>
                             <td>Curso</td>
                             <td>
@@ -378,19 +374,15 @@
                                         <option value="1ro 1ra GAO" ' . (isset($curso) && $curso == "1ro 1ra GAO" ? "selected": "") . '?>1ro 1ra GAO</option>
                                         <option value="1ro 2da GAO" ' . (isset($curso) && $curso == "1ro 2da GAO" ? "selected": "") . '?>1ro 2da GAO</option>
                                         <option value="1ro 3ra GAO" ' . (isset($curso) && $curso == "1ro 3ra GAO" ? "selected": "") . '?>1ro 3ra GAO</option>
-                                        <option value="1ro 4ta GAO" ' . (isset($curso) && $curso == "1ro 4ta GAO" ? "selected": "") . '?>1ro 4ta GAO</option>
                                         <option value="2do 1ra GAO" ' . (isset($curso) && $curso == "2do 1ra GAO" ? "selected": "") . '?>2do 1ra GAO</option>
                                         <option value="2do 2da GAO" ' . (isset($curso) && $curso == "2do 2da GAO" ? "selected": "") . '?>2do 2da GAO</option>
                                         <option value="2do 3ra GAO" ' . (isset($curso) && $curso == "2do 3ra GAO" ? "selected": "") . '?>2do 3ra GAO</option>
-                                        <option value="2do 4ta GAO" ' . (isset($curso) && $curso == "2do 4ta GAO" ? "selected": "") . '?>2do 4ta GAO</option>
                                         <option value="3ro 1ra GAO" ' . (isset($curso) && $curso == "3ro 1ra GAO" ? "selected": "") . '?>3ro 1ra GAO</option>
                                         <option value="3ro 2da GAO" ' . (isset($curso) && $curso == "3ro 2da GAO" ? "selected": "") . '?>3ro 2da GAO</option>
                                         <option value="3ro 3ra GAO" ' . (isset($curso) && $curso == "3ro 3ra GAO" ? "selected": "") . '?>3ro 3ra GAO</option>
-                                        <option value="3ro 4ta GAO" ' . (isset($curso) && $curso == "3ro 4ta GAO" ? "selected": "") . '?>3ro 4ta GAO</option>
                                         <option value="4to 1ra GAO" ' . (isset($curso) && $curso == "4to 1ra GAO" ? "selected": "") . '?>4to 1ra GAO</option>
                                         <option value="4to 2da GAO" ' . (isset($curso) && $curso == "4to 2da GAO" ? "selected": "") . '?>4to 2da GAO</option>
                                         <option value="4to 3ra GAO" ' . (isset($curso) && $curso == "4to 3ra GAO" ? "selected": "") . '?>4to 3ra GAO</option>
-                                        <option value="4to 4ta GAO" ' . (isset($curso) && $curso == "4to 4ta GAO" ? "selected": "") . '?>4to 4ta GAO</option>
                                     </optgroup>
                                     <optgroup label="TEP">
                                         <option value="1ro 1ra TEP" ' . (isset($curso) && $curso == "1ro 1ra TEP" ? "selected": "") . '?>1ro 1ra TEP</option>
@@ -424,7 +416,7 @@
                         </tr>
                         <tr>
                             <td>Correo del Tutor</td>
-                            <td><input type="text" maxlength="50" name="correo" value="' . (isset($correo) ? escapar($correo) : '') . '" required></td>
+                            <td><input type="text" maxlength="50" name="correo" value="' . (isset($correo) ? escapar($correo) : '') . '"></td>
                             </td>
                         </tr>
                     </table>

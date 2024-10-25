@@ -74,6 +74,18 @@ if (!in_array("Administrador", $permisos) && !in_array($curso, $permisos)) {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $absences[$alumno['id']] = $result['total_absences'] ?? 0;
     }
+    
+    // Obtener la última fecha de asistencia registrada para el curso seleccionado
+    $stmt = $pdo->prepare("
+    SELECT MAX(fecha) AS ultima_fecha
+    FROM asistencias a
+    JOIN alumnos al ON a.alumno_id = al.id
+    WHERE al.curso = :curso
+    ");
+    $stmt->execute(['curso' => $curso]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $ultimo_registro = $result['ultima_fecha'] ? $result['ultima_fecha'] : 'No hay registros';
+
 
     // Si se envía el formulario
     if (isset($_POST["registrar"])) {
@@ -91,10 +103,10 @@ if (!in_array("Administrador", $permisos) && !in_array($curso, $permisos)) {
             }
 
             $pdo->commit();
-            echo "Asistencia registrada correctamente.";
+            echo "<script>alert('Asistencia registrada correctamente.');</script>";
         } catch (PDOException $e) {
             $pdo->rollBack();
-            echo "Error al registrar la asistencia: " . $e->getMessage();
+            echo "<script>alert('Error al registrar la asistencia: '". $e->getMessage() . ");</script>";
         }
     }
 
@@ -106,16 +118,16 @@ $anioSeleccionado = isset($_POST['mes_anio']) ? explode('-', $_POST['mes_anio'])
 
 
 
+// Obtener la última fecha de asistencia registrada para el curso seleccionado
 $stmt = $pdo->prepare("
-    SELECT al.sexo, a.estado, COUNT(*) as total
+    SELECT MAX(fecha) AS ultima_fecha
     FROM asistencias a
     JOIN alumnos al ON a.alumno_id = al.id
     WHERE al.curso = :curso
-    AND MONTH(a.fecha) = :mes
-    AND YEAR(a.fecha) = :anio
-    GROUP BY al.sexo, a.estado
 ");
-$stmt->execute(['curso' => $curso, 'mes' => $mesSeleccionado, 'anio' => $anioSeleccionado]);
+$stmt->execute(['curso' => $curso]);
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$ultimo_registro = $result['ultima_fecha'] ? date('d-m-Y', strtotime($result['ultima_fecha'])) : 'No hay registros';
 
 $asistenciaData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -169,6 +181,7 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 ?>
         <h1>Registro de Asistencias</h1>
         <h1> <?php echo htmlspecialchars($curso); ?></h1>
+        <h3> Último registro: <?echo $ultimo_registro;?> </h3>
         <form method="POST">
             <div class="table-container">
                 <table class="table">
@@ -188,7 +201,7 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
                             if ($total_absences >= 20) {
                                 $class = 'red-name'; // Rojo si tiene 20 o más inasistencias
                             } elseif ($total_absences >= 10) {
-                                $class = 'orange-name'; // Naranja si tiene entre 15 y 19 inasistencias
+                                $class = 'orange-name'; // Naranja si tiene entre 10 y 19 inasistencias
                             }
                         ?>
                         <tr class="<?php echo $class; ?>">

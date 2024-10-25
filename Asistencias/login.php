@@ -58,11 +58,11 @@ session_start();
             <font size="2" face="Bahnschrift">
                 <table align="center">
                     <tr>
-                        <td>INGRESE EL NOMBRE DE USUARIO</td>
+                        <td>NOMBRE</td>
                         <td><input type="text" name="nombre" required></td>
                     </tr>
                     <tr>
-                        <td>INGRESE LA CONTRASEÑA</td>
+                        <td>CONTRASEÑA</td>
                         <td><input type="password" name="contraseña" required></td>
                     </tr>
                     <tr>

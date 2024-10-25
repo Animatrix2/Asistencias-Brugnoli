@@ -117,6 +117,9 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Gestión de Cuentas</title>
 
 </head>
+<br>
+<a href="index.php"><button class="btn btn-logout" >Volver</button></a>
+<br>
     <div class="container">
         <h2>Lista de Usuarios</h2>
         <div class="table-container">
@@ -163,64 +166,60 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <td>
 <div class="CB">
 <strong>Ciclo Básico</strong><br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra CB"> 1ro 1ra CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 2da CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 2da CB"> 1ro 2da CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 3ra CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 3ra CB"> 1ro 3ra CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 4ta CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 4ta CB"> 1ro 4ta CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 5ta CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 5ta CB"> 1ro 5ta CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 6ta CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 6ta CB"> 1ro 6ta CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 7ma CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 7ma CB"> 1ro 7ma CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 1ra CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 1ra CB"> 2do 1ra CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 2da CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 2da CB"> 2do 2da CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 3ra CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 3ra CB"> 2do 3ra CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 4ta CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 4ta CB"> 2do 4ta CB<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 5ta CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 5ta CB"> 2do 5ta CB<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra CB"> 1ro 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 2da CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 2da CB"> 1ro 2da<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 3ra CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 3ra CB"> 1ro 3ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 4ta CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 4ta CB"> 1ro 4ta<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 5ta CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 5ta CB"> 1ro 5ta<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 6ta CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 6ta CB"> 1ro 6ta<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 7ma CB", explode(',', $permiso))) echo 'checked'; ?> value="1ro 7ma CB"> 1ro 7ma<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 1ra CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 1ra CB"> 2do 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 2da CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 2da CB"> 2do 2da<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 3ra CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 3ra CB"> 2do 3ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 4ta CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 4ta CB"> 2do 4ta<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 5ta CB", explode(',', $permiso))) echo 'checked'; ?> value="2do 5ta CB"> 2do 5ta<br>
 </div>
 </td>
 
 <td>
 <div class="IPP">
 <br><strong>IPP</strong><br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra IPP"> 1ro 1ra IPP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="1ro 2da IPP"> 1ro 2da IPP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="2do 1ra IPP"> 2do 1ra IPP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="2do 2da IPP"> 2do 2da IPP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="3ro 1ra IPP"> 3ro 1ra IPP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="3ro 2da IPP"> 3ro 2da IPP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="4to 1ra IPP"> 4to 1ra IPP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="4to 2da IPP"> 4to 2da IPP<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra IPP"> 1ro 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="1ro 2da IPP"> 1ro 2da<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="2do 1ra IPP"> 2do 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="2do 2da IPP"> 2do 2da<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="3ro 1ra IPP"> 3ro 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="3ro 2da IPP"> 3ro 2da<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 1ra IPP", explode(',', $permiso))) echo 'checked'; ?> value="4to 1ra IPP"> 4to 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 2da IPP", explode(',', $permiso))) echo 'checked'; ?> value="4to 2da IPP"> 4to 2da<br>
 </div>
 </td>
 
 <td>
 <div class="GAO">
 <br><strong>GAO</strong><br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra GAO"> 1ro 1ra GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="1ro 2da GAO"> 1ro 2da GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 3ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="1ro 3ra GAO"> 1ro 3ra GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 4ta GAO", explode(',', $permiso))) echo 'checked'; ?> value="1ro 4ta GAO"> 1ro 4ta GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 1ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="2do 1ra GAO"> 2do 1ra GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="2do 2da GAO"> 2do 2da GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 3ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="2do 3ra GAO"> 2do 3ra GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 4ta GAO", explode(',', $permiso))) echo 'checked'; ?> value="2do 4ta GAO"> 2do 4ta GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 1ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="3ro 1ra GAO"> 3ro 1ra GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="3ro 2da GAO"> 3ro 2da GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 3ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="3ro 3ra GAO"> 3ro 3ra GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 4ta GAO", explode(',', $permiso))) echo 'checked'; ?> value="3ro 4ta GAO"> 3ro 4ta GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 1ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 1ra GAO"> 4to 1ra GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 2da GAO"> 4to 2da GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 3ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 3ra GAO"> 4to 3ra GAO<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 4ta GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 4ta GAO"> 4to 4ta GAO<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra GAO"> 1ro 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="1ro 2da GAO"> 1ro 2da<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 3ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="1ro 3ra GAO"> 1ro 3ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 1ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="2do 1ra GAO"> 2do 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="2do 2da GAO"> 2do 2da<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 3ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="2do 3ra GAO"> 2do 3ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 1ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="3ro 1ra GAO"> 3ro 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="3ro 2da GAO"> 3ro 2da<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 3ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="3ro 3ra GAO"> 3ro 3ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 1ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 1ra GAO"> 4to 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 2da GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 2da GAO"> 4to 2da<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 3ra GAO", explode(',', $permiso))) echo 'checked'; ?> value="4to 3ra GAO"> 4to 3ra<br>
 </div>
 </td>
 
 <td>
 <div class="TEP"></div>
 <br><strong>TEP</strong><br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra TEP"> 1ro 1ra TEP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="2do 1ra TEP"> 2do 1ra TEP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="3ro 1ra TEP"> 3ro 1ra TEP<br>
-<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="4to 1ra TEP"> 4to 1ra TEP<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("1ro 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="1ro 1ra TEP"> 1ro 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("2do 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="2do 1ra TEP"> 2do 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("3ro 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="3ro 1ra TEP"> 3ro 1ra<br>
+<input type="checkbox" name="cursos[]" <?php if (isset($permiso) && in_array("4to 1ra TEP", explode(',', $permiso))) echo 'checked'; ?> value="4to 1ra TEP"> 4to 1ra<br>
 </div>
 </td>
 </table>
@@ -236,7 +235,6 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         
         
-        <a href="index.php"><button class="btn btn-logout" >Volver</button></a>
 
     </div>
 </div>

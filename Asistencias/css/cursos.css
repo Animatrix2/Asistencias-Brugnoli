@@ -113,3 +113,19 @@ p {
 .rojo:hover{
     background-color: #9b1a27;
 }
+.orange-name {
+    color: rgb(236, 128, 56);
+    font-weight: bold;
+}
+
+.red-name {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
+.alert-box{ 
+    color: #a94442; 
+    font-size: 18px; 
+    padding: 20px; 
+    margin: 20px; 
+    border-radius: 5px; 
+}

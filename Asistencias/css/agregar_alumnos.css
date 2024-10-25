@@ -263,3 +263,10 @@ table tr:hover {
     color: rgb(255, 0, 0);
     font-weight: bold;
 }
+.alert-box{ 
+    color: #a94442; 
+    font-size: 18px; 
+    padding: 20px; 
+    margin: 20px; 
+    border-radius: 5px; 
+  }
