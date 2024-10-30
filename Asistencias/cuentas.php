@@ -306,6 +306,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     </td>
                                 </tr>
                             </table>
+                            <input type="checkbox" name="cursos[]" value="Administrador" <?php if (in_array("Administrador", explode(',', $usuarioEditar['permisos']))) echo 'checked'; ?>> Administrador<br>
                         </div>
                     </div>
                     <button class="btn registrar" type="submit" name="editar">Actualizar Cuenta</button>
