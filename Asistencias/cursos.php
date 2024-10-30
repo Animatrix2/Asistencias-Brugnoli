@@ -86,7 +86,6 @@ if (!in_array("Administrador", $permisos) && !in_array($curso, $permisos)) {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $absences[$alumno['id']] = $result['total_absences'] ?? 0;
     }
-    
     // Obtener la última fecha de asistencia registrada para el curso seleccionado
     $stmt = $pdo->prepare("
     SELECT MAX(fecha) AS ultima_fecha
@@ -97,6 +96,7 @@ if (!in_array("Administrador", $permisos) && !in_array($curso, $permisos)) {
     $stmt->execute(['curso' => $curso]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $ultimo_registro = $result['ultima_fecha'] ? $result['ultima_fecha'] : 'No hay registros';
+
 
 
     // Si se envía el formulario
@@ -130,16 +130,16 @@ $anioSeleccionado = isset($_POST['mes_anio']) ? explode('-', $_POST['mes_anio'])
 
 
 
-// Obtener la última fecha de asistencia registrada para el curso seleccionado
 $stmt = $pdo->prepare("
-    SELECT MAX(fecha) AS ultima_fecha
+    SELECT al.sexo, a.estado, COUNT(*) as total
     FROM asistencias a
     JOIN alumnos al ON a.alumno_id = al.id
     WHERE al.curso = :curso
+    AND MONTH(a.fecha) = :mes
+    AND YEAR(a.fecha) = :anio
+    GROUP BY al.sexo, a.estado
 ");
-$stmt->execute(['curso' => $curso]);
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
-$ultimo_registro = $result['ultima_fecha'] ? date('d-m-Y', strtotime($result['ultima_fecha'])) : 'No hay registros';
+$stmt->execute(['curso' => $curso, 'mes' => $mesSeleccionado, 'anio' => $anioSeleccionado]);
 
 $asistenciaData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -193,7 +193,7 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 ?>
         <h1>Registro de Asistencias</h1>
         <h1> <?php echo htmlspecialchars($curso); ?></h1>
-        <h3> Último registro: <?echo $ultimo_registro;?> </h3>
+        <h3> Último registro: <?php echo $ultimo_registro;?> </h3>
         <form method="POST">
             <div class="table-container">
                 <table class="table">
@@ -339,7 +339,6 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 
     <footer style="text-align: center; padding: 20px;  background-color: #777777; color: white; margin-top: 20px; margin:auto;">
         <p>Hecho por Almenar, Rodrigo Nicolas (almenar.nicolas@gmail.com) - Alfonsi, Luciano (alfonsiluciano@gmail.com).</p>
-        <p>4° 1° CSIPP - PROMOCIÓN 2024</p>
     </footer>
 </body>
 </html>

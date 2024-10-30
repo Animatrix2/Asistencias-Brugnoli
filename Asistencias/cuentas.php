@@ -1,4 +1,4 @@
-<<?php 
+<?php 
 // Revisar permisos del usuario
 if (session_status() != PHP_SESSION_ACTIVE) {
     session_start();
