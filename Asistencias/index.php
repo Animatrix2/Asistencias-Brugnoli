@@ -33,7 +33,7 @@
         <tr>
             <th>
             <div class="saludo">
-                <h1>¡Bienvenido, <?php echo htmlspecialchars($_SESSION["usuario"]); ?>!</h1>
+                <h1>¡Bienvenido/a, <?php echo htmlspecialchars($_SESSION["usuario"]); ?>!</h1>
             </div>
             </th>
         </tr>
@@ -58,6 +58,7 @@
     </table>
     <footer style="text-align: center; padding: 20px;  background-color: #777777; color: white; margin-top: 20px; margin:auto; position: absolute; bottom: 0;">
         <p>Hecho por Almenar, Rodrigo Nicolas (almenar.nicolas@gmail.com) - Alfonsi, Luciano (alfonsiluciano@gmail.com).</p>
+        <p>4° 1° CSIPP - PROMOCIÓN 2024</p>
     </footer>
 </body>
 </html>

@@ -284,6 +284,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 <footer style="text-align: center; padding: 20px;  background-color: #777777; color: white; margin-top: 20px;">
     <p>Hecho por Almenar, Rodrigo Nicolas (almenar.nicolas@gmail.com) - Alfonsi, Luciano (alfonsiluciano@gmail.com).</p>
+    <p>4° 1° CSIPP - PROMOCIÓN 2024</p>
 </footer>
 </body>
 </html>

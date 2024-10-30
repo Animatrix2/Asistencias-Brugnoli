@@ -90,6 +90,7 @@ session_start();
     </div>
     <footer style="text-align: center; padding: 20px;  background-color: #777777; color: white; margin-top: 20px; margin:auto; position: absolute; bottom: 0;">
         <p>Hecho por Almenar, Rodrigo Nicolas (almenar.nicolas@gmail.com) - Alfonsi, Luciano (alfonsiluciano@gmail.com).</p>
+        <p>4° 1° CSIPP - PROMOCIÓN 2024</p>
     </footer>
 </body>
 </html>
