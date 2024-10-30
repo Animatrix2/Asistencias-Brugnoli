@@ -8,6 +8,18 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/index.css">
+    <style>
+        /* Asegura que el footer esté al final */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .main-content {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
     <?php
@@ -58,11 +70,11 @@ session_start();
             <font size="2" face="Bahnschrift">
                 <table align="center">
                     <tr>
-                        <td>INGRESE EL NOMBRE DE USUARIO</td>
+                        <td>NOMBRE</td>
                         <td><input type="text" name="nombre" required></td>
                     </tr>
                     <tr>
-                        <td>INGRESE LA CONTRASEÑA</td>
+                        <td>CONTRASEÑA</td>
                         <td><input type="password" name="contraseña" required></td>
                     </tr>
                     <tr>
@@ -74,7 +86,10 @@ session_start();
             </font>
         </form>
         <p><?php echo $mensaje; ?></p>
+        </div>
     </div>
-    </div>
+    <footer style="text-align: center; padding: 20px;  background-color: #777777; color: white; margin-top: 20px; margin:auto; position: absolute; bottom: 0;">
+        <p>Hecho por Almenar, Rodrigo Nicolas (almenar.nicolas@gmail.com) - Alfonsi, Luciano (alfonsiluciano@gmail.com).</p>
+    </footer>
 </body>
 </html>

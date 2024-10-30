@@ -19,7 +19,7 @@ h1 {
 }
 
 .container {
-    width: 600px;
+    width: 80%;
     max-width: 1200px;
     background-color: white;
     border-radius: 8px;
@@ -158,9 +158,6 @@ table tr:hover {
     .formulario select, .formulario input[type="text"], .formulario input[type="number"] {
         width: 300px;
     }
-    .container {
-        width: 400px;
-    }
 }
 
 .ver{
@@ -225,8 +222,7 @@ table tr:hover {
 }
 
 .editar2{
-    background-color: #1bb355;
-
+    background-color: #1bb355; ;
 }
 
 .editar2:hover {
@@ -241,20 +237,11 @@ table tr:hover {
     background-color: #0056b3;
 }
 
-.botones{
-        display: block;
-        max-width: 200px;
-        margin: 0 auto;
-        width: 100%;
-}
-
 .btn-logout {
     background-color: #dc3545;
 
-    display: block;
-        max-width: 200px;
-        margin: 0 auto;
-        width: 100%;
+    display:block;
+    margin: auto;
 }
 
 .btn-logout:hover {
@@ -264,5 +251,22 @@ table tr:hover {
 .header td{
     text-align: center;
     font-weight: bold;
+
 }
 
+.orange-name {
+    color: rgb(236, 128, 56);
+    font-weight: bold;
+}
+
+.red-name {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
+.alert-box{ 
+    color: #a94442; 
+    font-size: 18px; 
+    padding: 20px; 
+    margin: 20px; 
+    border-radius: 5px; 
+  }

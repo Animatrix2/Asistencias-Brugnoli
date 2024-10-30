@@ -15,6 +15,18 @@
             });
         }
     </script>
+    <style>
+        /* Asegura que el footer esté al final */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .main-content {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
 
@@ -66,6 +78,27 @@ if (!in_array("Administrador", $permisos) && !in_array($curso, $permisos)) {
         $asistencias_tot[$alumno['id']] = $asistencia ? $asistencia['estado'] : null;
     }
 
+    // Obtener el número total de inasistencias para cada alumno
+    $absences = [];
+    foreach ($alumnos as $alumno) {
+        $stmt = $pdo->prepare("SELECT COUNT(*) as total_absences FROM asistencias WHERE alumno_id = :alumno_id AND estado = 'inasistencia'");
+        $stmt->execute(['alumno_id' => $alumno['id']]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $absences[$alumno['id']] = $result['total_absences'] ?? 0;
+    }
+    
+    // Obtener la última fecha de asistencia registrada para el curso seleccionado
+    $stmt = $pdo->prepare("
+    SELECT MAX(fecha) AS ultima_fecha
+    FROM asistencias a
+    JOIN alumnos al ON a.alumno_id = al.id
+    WHERE al.curso = :curso
+    ");
+    $stmt->execute(['curso' => $curso]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $ultimo_registro = $result['ultima_fecha'] ? $result['ultima_fecha'] : 'No hay registros';
+
+
     // Si se envía el formulario
     if (isset($_POST["registrar"])) {
         try {
@@ -82,10 +115,10 @@ if (!in_array("Administrador", $permisos) && !in_array($curso, $permisos)) {
             }
 
             $pdo->commit();
-            echo "Asistencia registrada correctamente.";
+            echo "<script>alert('Asistencia registrada correctamente.');</script>";
         } catch (PDOException $e) {
             $pdo->rollBack();
-            echo "Error al registrar la asistencia: " . $e->getMessage();
+            echo "<script>alert('Error al registrar la asistencia: '". $e->getMessage() . ");</script>";
         }
     }
 
@@ -97,16 +130,16 @@ $anioSeleccionado = isset($_POST['mes_anio']) ? explode('-', $_POST['mes_anio'])
 
 
 
+// Obtener la última fecha de asistencia registrada para el curso seleccionado
 $stmt = $pdo->prepare("
-    SELECT al.sexo, a.estado, COUNT(*) as total
+    SELECT MAX(fecha) AS ultima_fecha
     FROM asistencias a
     JOIN alumnos al ON a.alumno_id = al.id
     WHERE al.curso = :curso
-    AND MONTH(a.fecha) = :mes
-    AND YEAR(a.fecha) = :anio
-    GROUP BY al.sexo, a.estado
 ");
-$stmt->execute(['curso' => $curso, 'mes' => $mesSeleccionado, 'anio' => $anioSeleccionado]);
+$stmt->execute(['curso' => $curso]);
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$ultimo_registro = $result['ultima_fecha'] ? date('d-m-Y', strtotime($result['ultima_fecha'])) : 'No hay registros';
 
 $asistenciaData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -158,7 +191,9 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 
 
 ?>
-        <h1>Registro de Asistencia - Curso <?php echo htmlspecialchars($curso); ?></h1>
+        <h1>Registro de Asistencias</h1>
+        <h1> <?php echo htmlspecialchars($curso); ?></h1>
+        <h3> Último registro: <?echo $ultimo_registro;?> </h3>
         <form method="POST">
             <div class="table-container">
                 <table class="table">
@@ -168,7 +203,20 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
                         <th>Estado</th>
                     </tr>
                     <?php foreach ($alumnos as $alumno): ?>
-                        <tr>
+                        <?php
+                            $alumno_id = $alumno['id'];
+                            // Obtener el número de inasistencias para este alumno (si existen)
+                            $total_absences = isset($absences[$alumno_id]) ? $absences[$alumno_id] : 0;
+
+                            // Asignar la clase CSS según el número de inasistencias
+                            $class = '';
+                            if ($total_absences >= 20) {
+                                $class = 'red-name'; // Rojo si tiene 20 o más inasistencias
+                            } elseif ($total_absences >= 10) {
+                                $class = 'orange-name'; // Naranja si tiene entre 10 y 19 inasistencias
+                            }
+                        ?>
+                        <tr class="<?php echo $class; ?>">
                             <td><?php echo htmlspecialchars($alumno['nombre']); ?></td>
                             <td><?php echo htmlspecialchars($alumno['apellido']); ?></td>
                             <td>
@@ -193,16 +241,16 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
         </form>
 
         <div class="btn-group">
-            <button class="btn" onclick="marcarTodos('asistencia')">Marcar Asistencia para Todos</button>
-            <button class="btn" onclick="marcarTodos('inasistencia')">Marcar Falta para Todos</button>
+            <button class="btn verde" onclick="marcarTodos('asistencia')">Marcar Asistencia para Todos</button>
+            <button class="btn rojo" onclick="marcarTodos('inasistencia')">Marcar Falta para Todos</button>
         </div>
 
 
 
-        <h2>Resumen de Asistencias del Curso en el Mes Actual</h2>
+        <h2>Resumen de Asistencias</h2>
        
 
-        <table class="summary-table">
+        <table class="table summary-table" border="1">
             <tr>
                 <th></th>
                 <th>Varones</th>
@@ -222,20 +270,20 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
                 <td><?php echo htmlspecialchars(number_format($totalInasistencias, 2)); ?></td>
             </tr>
             <tr>
-                <td>Porcentaje de Asistencias</td>
+                <th>Porcentaje de Asistencias</th>
                 <td><?php echo htmlspecialchars(number_format($porcentajeAsistenciasVarones, 2)); ?>%</td>
                 <td><?php echo htmlspecialchars(number_format($porcentajeAsistenciasMujeres, 2)); ?>%</td>
                 <td><?php echo htmlspecialchars(number_format($porcentajeTotalAsistencias, 2)); ?>%</td>
             </tr>
             <tr>
                 <th >Asistencia Media</th>
-                <td colspan="3"><?php echo htmlspecialchars(number_format($asistenciaMedia, 2)); ?></td>
+                <td colspan="3" style="text-align:center;"><?php echo htmlspecialchars(number_format($asistenciaMedia, 2)); ?></td>
             </tr>
             <tr>
                 <th></th>
                 <td <label for="dias_habiles"Días hábiles:</label>
                 <form method="POST">
-                Cantidad de Días hábiles<input type="number" id="dias_habiles" name="dias_habiles" value="<?php echo htmlspecialchars($diasHabiles); ?>" min="1" required>
+                Cantidad de Días Hábiles<input type="number" id="dias_habiles" name="dias_habiles" value="<?php echo htmlspecialchars($diasHabiles); ?>" min="1" required>
 
 </td>
 <td>
@@ -271,7 +319,26 @@ $porcentajeTotalAsistencias = ($calculoTotal > 0) ? ($totalAsistencias * 100) / 
 
             </tr>
         </table>
+        <form action="generar_pdf_estadisticas.php" method="POST" target="_blank">
+    <input type="hidden" name="curso" value="<?php echo htmlspecialchars($curso); ?>">
+    <input type="hidden" name="mes_anio" value="<?php echo htmlspecialchars($mesesEspañol[$mesSeleccionado - 1] . ' ' . $anioSeleccionado); ?>">
+    <input type="hidden" name="asistencias_varones" value="<?php echo htmlspecialchars($asistencias['Masculino']['asistencia']); ?>">
+    <input type="hidden" name="asistencias_mujeres" value="<?php echo htmlspecialchars($asistencias['Femenino']['asistencia']); ?>">
+    <input type="hidden" name="inasistencias_varones" value="<?php echo htmlspecialchars($asistencias['Masculino']['inasistencia']); ?>">
+    <input type="hidden" name="inasistencias_mujeres" value="<?php echo htmlspecialchars($asistencias['Femenino']['inasistencia']); ?>">
+    <input type="hidden" name="tardanzas_varones" value="<?php echo htmlspecialchars($asistencias['Masculino']['tardanza']); ?>">
+    <input type="hidden" name="tardanzas_mujeres" value="<?php echo htmlspecialchars($asistencias['Femenino']['tardanza']); ?>">
+    <input type="hidden" name="porcentaje_varones" value="<?php echo htmlspecialchars(number_format($porcentajeAsistenciasVarones, 2)); ?>">
+    <input type="hidden" name="porcentaje_mujeres" value="<?php echo htmlspecialchars(number_format($porcentajeAsistenciasMujeres, 2)); ?>">
+    <input type="hidden" name="porcentaje_total" value="<?php echo htmlspecialchars(number_format($porcentajeTotalAsistencias, 2)); ?>">
+    <input type="hidden" name="asistencia_media" value="<?php echo htmlspecialchars($asistenciaMedia); ?>">    
+    <button type="submit" class="btn">Descargar Resumen en PDF</button>
+</form>
 
     </div>
+
+    <footer style="text-align: center; padding: 20px;  background-color: #777777; color: white; margin-top: 20px; margin:auto;">
+        <p>Hecho por Almenar, Rodrigo Nicolas (almenar.nicolas@gmail.com) - Alfonsi, Luciano (alfonsiluciano@gmail.com).</p>
+    </footer>
 </body>
 </html>

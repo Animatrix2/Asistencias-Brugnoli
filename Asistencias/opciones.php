@@ -64,33 +64,25 @@ else if (array_key_exists('1ro-1ra-GAO', $_POST)) {
     $curso = "1ro 2da GAO";
 } else if (array_key_exists('1ro-3ra-GAO', $_POST)) { 
     $curso = "1ro 3ra GAO";
-} else if (array_key_exists('1ro-4ta-GAO', $_POST)) { 
-    $curso = "1ro 4ta GAO";
 } else if (array_key_exists('2do-1ra-GAO', $_POST)) { 
     $curso = "2do 1ra GAO";
 } else if (array_key_exists('2do-2da-GAO', $_POST)) { 
     $curso = "2do 2da GAO";
 } else if (array_key_exists('2do-3ra-GAO', $_POST)) { 
     $curso = "2do 3ra GAO";
-} else if (array_key_exists('2do-4ta-GAO', $_POST)) { 
-    $curso = "2do 4ta GAO";
 } else if (array_key_exists('3ro-1ra-GAO', $_POST)) { 
     $curso = "3ro 1ra GAO";
 } else if (array_key_exists('3ro-2da-GAO', $_POST)) { 
     $curso = "3ro 2da GAO";
 } else if (array_key_exists('3ro-3ra-GAO', $_POST)) { 
     $curso = "3ro 3ra GAO";
-} else if (array_key_exists('3ro-4ta-GAO', $_POST)) { 
-    $curso = "3ro 4ta GAO";
 } else if (array_key_exists('4to-1ra-GAO', $_POST)) { 
     $curso = "4to 1ra GAO";
 } else if (array_key_exists('4to-2da-GAO', $_POST)) { 
     $curso = "4to 2da GAO";
 } else if (array_key_exists('4to-3ra-GAO', $_POST)) { 
     $curso = "4to 3ra GAO";
-} else if (array_key_exists('4to-4ta-GAO', $_POST)) { 
-    $curso = "4to 4ta GAO";
-}
+} 
 
 //    TEP
 else if (array_key_exists('1ro-1ra-TEP', $_POST)) { 
@@ -169,19 +161,15 @@ $_SESSION["curso"] = $curso;
                     <input type="submit" name="1ro-1ra-GAO" value="1ro 1ra" class="curso">
                     <input type="submit" name="1ro-2da-GAO" value="1ro 2da" class="curso">
                     <input type="submit" name="1ro-3ra-GAO" value="1ro 3ra" class="curso">
-                    <input type="submit" name="1ro-4ta-GAO" value="1ro 4ta" class="curso">
                     <input type="submit" name="2do-1ra-GAO" value="2do 1ra" class="curso">
                     <input type="submit" name="2do-2da-GAO" value="2do 2da" class="curso">
                     <input type="submit" name="2do-3ra-GAO" value="2do 3ra" class="curso">
-                    <input type="submit" name="2do-4ta-GAO" value="2do 4ta" class="curso">
                     <input type="submit" name="3ro-1ra-GAO" value="3ro 1ra" class="curso">
                     <input type="submit" name="3ro-2da-GAO" value="3ro 2da" class="curso">
                     <input type="submit" name="3ro-3ra-GAO" value="3ro 3ra" class="curso">
-                    <input type="submit" name="3ro-4ta-GAO" value="3ro 4ta" class="curso">
                     <input type="submit" name="4to-1ra-GAO" value="4to 1ra" class="curso">
                     <input type="submit" name="4to-2da-GAO" value="4to 2da" class="curso">
                     <input type="submit" name="4to-3ra-GAO" value="4to 3ra" class="curso">
-                    <input type="submit" name="4to-4ta-GAO" value="4to 4ta" class="curso">
 
                     <h3>Técnico en Programación</h3>
                     <input type="submit" name="1ro-1ra-TEP" value="1ro 1ra" class="curso">
@@ -192,5 +180,6 @@ $_SESSION["curso"] = $curso;
             </div>
         </form>
     </div>
+    
 </body>
 </html>
